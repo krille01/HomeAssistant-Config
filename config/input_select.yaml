@@ -1,0 +1,20 @@
+spotify_source:
+  name: 'Source:'
+  options:
+    - Bathroom speaker
+    - Kjøkken
+    - Stue
+    - Gruppe 1 etage
+    - Home hovedsoverom
+
+restavfall:
+  name: 'Restavfall'
+  options:
+    - Ikke nå
+    - I morgen
+    
+papir:
+  name: 'Papir'
+  options:
+    - Ikke nå
+    - I morgen

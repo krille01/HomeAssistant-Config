@@ -1,0 +1,6 @@
+livingroom_tv_app_netflix:
+  method: POST
+  url: 'http://192.168.86.21:8080/ws/app/Netflix'
+livingroom_tv_app_youtube:
+  method: POST
+  url: 'http://192.168.86.21:8080/ws/app/YouTube'

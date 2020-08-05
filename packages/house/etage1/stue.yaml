@@ -1,0 +1,49 @@
+##########################################################################################
+#                          Oslo Lampe                                                    #
+##########################################################################################
+
+
+automation:
+  - alias: 'Toggle oslo lampe from dimmer'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: dimmer_oslo_lampe
+        event: 4002
+    action:
+      service: light.toggle
+      entity_id: light.oslo_lampe
+
+  - alias: 'Increase brightness of oslo lampe from dimmer'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: dimmer_oslo_lampe
+        event: 2002
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.oslo_lampe
+          brightness: >
+            {% set bri = state_attr('light.oslo_lampe', 'brightness') | int %}
+            {{ [bri+30, 249] | min }}
+
+  - alias: 'Decrease brightness of lamp oslo lampe dimmer'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: dimmer_oslo_lampe
+        event: 3002
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.oslo_lampe
+          brightness: >
+            {% set bri = state_attr('light.oslo_lampe', 'brightness') | int %}
+            {{ [bri-30, 0] | max }}

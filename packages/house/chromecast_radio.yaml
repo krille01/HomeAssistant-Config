@@ -1,0 +1,91 @@
+#################################################################
+#                                                               #
+#                          Customize                            #
+#                                                               #
+#################################################################
+
+input_select:
+  radio_station:
+    name: 'Select Radio Station:'
+    options:
+      - NRK Radioresepsjonen
+      - NRK Altid Nyheter
+      - NRK P1
+      - NRK P2
+      - NRK P3
+      - NRK Super
+      - NRK Sport
+      - Radio Rock
+    initial: NRK Altid Nyheter
+    icon: mdi:radio
+    
+  chromecast_radio:
+    name: 'Select Speakers:'
+    options:
+      - Kjøkken
+      - Stue
+      - Soverom
+    initial: Kjøkken
+    icon: mdi:speaker-wireless
+
+input_number: 
+  volume_radio:
+    name: Volume
+    icon: mdi:volume-high
+    min: 0
+    max: 1
+    step: 0.05
+
+automation:
+  - alias: Listen Radio
+    trigger:
+      - platform: state
+        entity_id: input_select.radio_station
+    action: 
+      - service: script.radio
+  - alias: Set Chromecast Radio Volume
+    trigger:
+      platform: state
+      entity_id: input_number.volume_radio
+    action:
+      service: media_player.volume_set
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.chromecast_radio", "Kjøkken") %} media_player.kjokken
+          {% elif is_state("input_select.chromecast_radio", "Stue") %} media_player.stue
+          {% elif is_state("input_select.chromecast_radio", "Soverom") %} media_player.home_hovedsoverom
+          {% endif %}
+        volume_level: '{{  states.input_number.volume_radio.state  }}'
+
+script:
+  radio:
+    alias: Play Radio on Chromecast Audio
+    sequence:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.chromecast_radio", "Kjøkken") %} media_player.kjokken
+          {% elif is_state("input_select.chromecast_radio", "Stue") %} media_player.stue
+          {% elif is_state("input_select.chromecast_radio", "Soverom") %} media_player.home_hovedsoverom
+          {% endif %}
+        volume_level: '{{  states.input_number.volume_radio.state  }}' 
+    - service: media_player.play_media
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.chromecast_radio", "Kjøkken") %} media_player.kjokken
+          {% elif is_state("input_select.chromecast_radio", "Stue") %} media_player.stue
+          {% elif is_state("input_select.chromecast_radio", "Soverom") %} media_player.home_hovedsoverom
+          {% endif %}
+        media_content_id: >
+          {% if is_state("input_select.radio_station", "NRK Radioresepsjonen") %} https://lyd.nrk.no/nrk_radio_p3_radioresepsjonen_mp3_h
+          {% elif is_state("input_select.radio_station", "NRK Altid Nyheter") %} https://lyd.nrk.no/nrk_radio_alltid_nyheter_mp3_h
+          {% elif is_state("input_select.radio_station", "NRK P1") %} https://lyd.nrk.no/nrk_radio_p1_ostlandssendingen_mp3_l
+          {% elif is_state("input_select.radio_station", "NRK P2") %} https://lyd.nrk.no/nrk_radio_p2_mp3_l
+          {% elif is_state("input_select.radio_station", "NRK P3") %} https://lyd.nrk.no/nrk_radio_p3_mp3_m
+          {% elif is_state("input_select.radio_station", "NRK Super") %} https://lyd.nrk.no/nrk_radio_super_mp3_h
+          {% elif is_state("input_select.radio_station", "NRK Sport") %} https://lyd.nrk.no/nrk_radio_sport_mp3_h
+          {% elif is_state("input_select.radio_station", "Radio Rock") %} https://live-bauerno.sharp-stream.com/radiorock_no_mp3?direct=true&listenerid=f1cf735526a3bd6806d17713eee27841&amsparams=playerid:SBS_RP_WEB;skey:1575363447;&awparams=loggedin:false;&aw_0_req.userConsent=undefined
+          {% endif %}
+        media_content_type: 'audio/mp4'
+
+

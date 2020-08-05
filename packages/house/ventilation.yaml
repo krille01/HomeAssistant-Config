@@ -1,0 +1,107 @@
+modbus:
+  name: hub1
+  type: tcp
+  host: 192.168.86.31
+  port: 8820
+  timeout: 10
+
+input_number:
+  fan_speed:
+    name: Fan Speed
+    min: 1
+    max: 3
+    step: 1
+    unit_of_measurement: step
+  temperature_set:
+    name: Temperature set
+    min: 0
+    max: 5
+    step: 1
+    unit_of_measurement: step
+
+automation:
+# Ventilasjon set vifte hastighet
+  - alias: Set fan speed
+    trigger:
+      platform: state
+      entity_id: input_number.fan_speed
+    action:
+      service: modbus.write_register
+      data:
+        hub: hub1
+        unit: 1
+        address: 100
+      data_template:
+        value: '{{ states.input_number.fan_speed.state|int }}'
+
+  - alias: Set fan speed number value
+    trigger:
+      platform: state
+      entity_id: sensor.fan_speed
+    action:
+      service: input_number.set_value
+      data_template:
+        entity_id: input_number.fan_speed
+        value: '{{ states.sensor.fan_speed.state }}'
+
+# Ventilasjon set temp.
+  - alias: Set temperature
+    trigger:
+      platform: state
+      entity_id: input_number.temperature_set
+    action:
+      service: modbus.write_register
+      data:
+          hub: hub1
+          unit: 1
+          address: 206
+      data_template:
+          value: '{{ states.input_number.temperature_set.state|int }}'
+
+  - alias: Set temperature number value
+    trigger:
+      platform: state
+      entity_id: sensor.temp_level
+    action:
+      service: input_number.set_value
+      data_template:
+        entity_id: input_number.temperature_set
+        value: '{{ states.sensor.temp_level_set.state }}'
+
+
+sensor:
+  - platform: modbus
+    registers:
+      - name: Outdoor temp
+        hub: hub1
+        unit_of_measurement: °C
+        slave: 1
+        register: 217
+        scale: 0.1
+      - name: Supply air
+        hub: hub1
+        unit_of_measurement: °C
+        slave: 1
+        register: 213
+        scale: 0.1
+      - name: Extract air
+        hub: hub1
+        unit_of_measurement: °C
+        slave: 1
+        register: 214
+        scale: 0.1
+      - name: temp level
+        hub: hub1
+        slave: 1
+        register: 206
+      - name: Fan Speed
+        hub: hub1
+        slave: 1
+        register: 100
+        scale: 1
+        offset: 0
+      - name: Filter age
+        hub: hub1
+        unit_of_measurement: days
+        slave: 1
+        register: 601

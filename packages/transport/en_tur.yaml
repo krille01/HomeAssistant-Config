@@ -1,0 +1,29 @@
+homeassistant:
+  customize:
+    sensor.next_buss_grenseveien:
+      icon: mdi:bus
+    sensor.next_buss_grenseveien_bhg:
+      icon: mdi:bus
+
+
+sensor:
+  - platform: entur_public_transport
+    name: Transport
+    number_of_departures: 5
+    stop_ids:
+      - 'NSR:StopPlace:5265'     # Grenseveien
+      - 'NSR:StopPlace:127'      # Ski stasjon
+      - 'NSR:StopPlace:5270'     # Bhgen
+
+  - platform: template
+    sensors:
+      next_buss_grenseveien:
+        friendly_name: Neste buss fra Grenseveien
+        value_template: "{{ states.sensor.transport_grenseveien_platform_9603.attributes.next_due_in }}"
+
+  - platform: template
+    sensors:
+      next_buss_grenseveien_bhg:
+        friendly_name: Neste buss fra Grenseveien til Barnehagen
+        value_template: "{{ states.sensor.transport_grenseveien_platform_9604.attributes.next_due_in }}"
+  

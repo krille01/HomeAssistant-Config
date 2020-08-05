@@ -1,0 +1,72 @@
+  ## IR Volume +
+  q_media_volume_up:
+    alias: 'Volume Up'
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: broadlink/rm3
+          payload: '58'
+
+  ## IR Volume -
+  q_media_volume_down:
+    alias: 'Volume Down'
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: broadlink/rm3
+          payload: '59'
+
+  ## IR Mute
+  q_media_mute:
+    alias: 'Mute TV'
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: broadlink/rm3
+          payload: '60'
+
+  ## IR on/off
+  q_media_offon:
+    alias: 'On Off'
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: broadlink/rm3
+          payload: '52'
+
+  ## IR Source Lydplanke
+  q_media_source:
+    alias: Source
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: broadlink/rm3
+          payload: '53'
+
+ ## Samsung TV
+  livingroom_tv_app_netflix:
+    sequence:
+      - service: rest_command.livingroom_tv_app_netflix
+
+  livingroom_tv_app_youtube:
+    sequence:
+      - service: rest_command.livingroom_tv_app_youtube
+
+## Resume spotify after TTS on google Home
+  snapshot_music_bedfore_tts:
+    sequence:
+      - event: spotify.controls
+        event_data:
+            action: snapshot
+
+  start_spotify_on_kjokken:
+    sequence:
+      - service: spotcast.start
+        data:
+          entity_id: media_player.kjokken
+
+  restore_snapshot_on_kjokken:
+    sequence:
+      - event: spotify.controls
+        event_data:
+            action: restore

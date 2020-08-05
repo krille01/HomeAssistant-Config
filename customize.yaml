@@ -1,0 +1,34 @@
+sensor.temp_level:
+  icon: mdi:thermometer
+sensor.fan_speed:
+  icon: mdi:fan
+input_number.temperature_set:
+  icon: mdi:thermometer
+device_tracker.huawei_mate_20_pro_474c44_lan:
+  friendly_name: Kristian Telefon
+automation.set_fan_speed:
+  icon: mdi:fan
+input_number.fan_speed:
+  icon: mdi:fan
+light.lys_gang:
+  icon: mdi:lightbulb
+script.q_media_mute:
+  icon: mdi:volume-off
+script.q_media_volume_down:
+  icon: mdi:volume-minus
+script.q_media_volume_up:
+  icon: mdi:volume-plus
+script.q_media_offon:
+  icon: mdi:power-settings
+light.trapp:
+  icon: mdi:ceiling-light
+switch.bryter_kjokken_benk:
+  icon: mdi:led-strip
+script.q_media_source:
+  icon: mdi:video-input-hdmi
+switch.ringeklokke:
+  icon: mdi:door
+binary_sensor.doors:
+  icon: mdi:door-closed
+sensor.washing_machine_status:
+  icon: mdi:washing-machine

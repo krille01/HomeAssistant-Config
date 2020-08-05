@@ -1,0 +1,87 @@
+chargeamps:
+  username: !secret charg_user
+  password: !secret charg_pass
+  api_key: !secret charg_key
+
+sensor:
+  - platform: template
+    sensors:
+      consumption_thismonth_charger:
+        friendly_name: "Forbruk denne måned lader"
+        unit_of_measurement: 'kWh'
+        value_template: "{{ (float(states('sensor.charger1_1708001510_total_energy')) - float(states('input_number.consumption_startofmonth_charger'))) | round(1) }}"
+
+      consumption_thisday_charger:
+        friendly_name: "Forbruk i dag lader"
+        unit_of_measurement: 'kWh'
+        value_template: "{{ (float(states('sensor.charger1_1708001510_total_energy')) - float(states('input_number.consumption_startofday_charger'))) | round(1) }}"
+
+      consumption_lastday_charger:
+        friendly_name: "Forbruk i går lader"
+        unit_of_measurement: 'kWh'
+        value_template: "{{ float(states('input_number.consumption_lastday_charger')) }}"
+
+input_number:
+  consumption_startofday_charger:
+    name: Forbruk Start på dag
+    max: 999999999
+    min: 0
+    step: 0.1
+    mode: box
+    unit_of_measurement: 'kWh'
+    icon: mdi:counter
+
+  consumption_lastday_charger:
+    name: Forbruk forrige dag
+    max: 999999999
+    min: 0
+    step: 0.1
+    mode: box
+    unit_of_measurement: 'kWh'
+    icon: mdi:counter
+
+  consumption_startofmonth_charger:
+    name: Forbruk Start på måned
+    max: 999999999
+    min: 0
+    step: 0.1
+    mode: box
+    unit_of_measurement: 'kWh'
+    icon: mdi:counter
+
+automation:
+- id: charger_månedskifte
+  alias: Månedsskifte Charger
+  description: ''
+  trigger:
+  - at: 0:30:00
+    platform: time
+  condition:
+  - condition: template
+    value_template: '{{ now().day == 1 }}'
+  action:
+  - alias: ''
+    data_template:
+      value: '{{ states.sensor.charger1_1708001510_total_energy.state }}'
+      entity_id: consumption_startofmonth_charger
+    service: input_number.set_value
+
+
+- id: charger_dagskifte
+  alias: Dagskifte Charger
+  description: ''
+  trigger:
+  - at: 0:05:00
+    platform: time
+  action:
+  - alias: ''
+    data_template:
+      entity_id: input_number.consumption_lastday_charger
+      value: '{{ (states(''sensor.charger1_1708001510_total_energy'') - float(states(''input_number.consumption_startofday'')))
+        | round(1) }}'
+    service: input_number.set_value
+  - alias: ''
+    data_template:
+      entity_id: input_number.consumption_startofday
+      value: '{{ states.sensor.charger1_1708001510_total_energy.state }}'
+    service: input_number.set_value

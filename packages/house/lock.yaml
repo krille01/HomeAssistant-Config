@@ -1,0 +1,176 @@
+#################################################################
+#                                                               #
+#                           Group                               #
+#                                                               #
+#################################################################
+
+group:
+  doors:
+    name: Doors
+    icon: mdi:door
+    entities:
+      switch.dor_takterasse
+
+
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+### For Lovelace UI ###
+
+####################################################
+#                                                  #
+#             Binary Sensor - Template             #
+#                                                  #
+####################################################
+
+binary_sensor:
+  - platform: template
+    sensors:
+## Door Sensors
+      doors:
+        friendly_name: Dører
+        device_class: door
+        entity_id: group.doors
+        value_template: "{{ is_state('group.doors', 'on') }}"
+        icon_template: >-
+          {% if is_state('group.doors', 'on') %}
+            mdi:door-open
+          {% elif is_state('group.doors', 'off') %}
+            mdi:door-closed         
+          {% else %}
+            mdi:alert
+          {% endif %}
+
+## Lock Sensor
+      lock:
+        friendly_name: Lås Inngangsdør
+        device_class: lock
+        entity_id: lock.gang
+        value_template: "{{ is_state('lock.gang', 'unlocked') }}"
+        icon_template: >-
+          {% if is_state('lock.gang', 'unlocked') %}
+            mdi:lock-open-variant
+          {% elif is_state('lock.gang', 'locked') %}
+            mdi:lock
+          {% else %}
+            mdi:alert
+          {% endif %}
+
+verisure:
+  username: !secret verisure_user
+  password: !secret verusre_pass
+  alarm: false
+  thermometers: false
+  hygrometers: false
+  smartplugs: false
+  locks: true
+  default_lock_code: !secret verisure
+  code_digits: "6"
+  mouse: false
+  door_window: false
+
+automation:
+# Door lock at night
+  - alias: Lock night
+    trigger:
+      platform: state
+      entity_id: lock.gang
+      to: unlocked
+      for:
+        minutes: 1
+    condition:
+      condition: time
+      after: '22:00:00'
+      before: 07:00:00
+    action:
+    - service: lock.lock
+      data:
+        entity_id: lock.gang
+        code: !secret verisure
+  
+  - alias: Lock for the night
+    trigger:
+    - at: '22:00:00'
+      platform: time
+    condition: []
+    action:
+    - data:
+        code: !secret verisure
+        entity_id: lock.gang
+      service: lock.lock
+
+
+sensor:
+  - platform: imap_email_content
+    server: imap.gmail.com
+    port: 993
+    name: Verisure Mail
+    username: !secret verisure_user
+    password: !secret verusre_pass
+    senders:
+      - 'no-reply@verisure.com'
+
+  - platform: template
+    sensors:
+      unlocked_by:
+        friendly_name: "Unlocked by"
+        entity_id: "sensor.verisure_mail"
+        value_template: >-
+          {% if states.sensor.verisure_mail.attributes.subject.find("Låst opp med kode") | int >= 0 %}
+            {% if states.sensor.verisure_mail.attributes.body.find("Kristian") | int >= 0 %}
+              Kristian
+            {% elif states.sensor.verisure_mail.attributes.body.find("Lill Venke") | int >= 0 %}
+              Lill Venke
+            {% elif states.sensor.verisure_mail.attributes.body.find("Vaskedame") | int >= 0 %}
+              Vaskedame
+            {% elif states.sensor.verisure_mail.attributes.body.find("Jakob") | int >= 0 %}
+              Jakob
+            {% elif states.sensor.verisure_mail.attributes.body.find("Samuel") | int >= 0 %}
+              Samuel
+            {% else %}
+              {{states.sensor.unlocked_by.state}}
+            {% endif %}
+          {% else %}
+            {{states.sensor.unlocked_by.state}}
+          {% endif %}
+        attribute_templates:
+          time: >-
+            {% if states.sensor.verisure_mail.attributes.subject.find("Låst opp med kode") | int >= 0 %}
+              {{ state_attr('sensor.verisure_mail', 'date') }}
+            {% else %}
+              {{ state_attr('sensor.unlocked_by', 'time') }}
+            {% endif %}
+
+      last_action:
+        friendly_name: "Last action"
+        entity_id: "sensor.verisure_mail"
+        value_template: >-
+          {% if states.sensor.verisure_mail.attributes.subject == "Låst opp med kode" %}
+            Unlocked keypad
+          {% elif states.sensor.verisure_mail.attributes.subject == "Låst opp" %}
+            {% if states.sensor.verisure_mail.attributes.body.find("innsiden") %}
+              Unlocked inside
+            {% elif states.sensor.verisure_mail.attributes.body.find("Home Assistant") %}
+              Unlocked Home Assistant
+            {% else %}
+              {{states.sensor.last_action.state}}
+            {% endif %}
+          {% elif states.sensor.verisure_mail.attributes.subject == "Låst" %}
+            {% if states.sensor.verisure_mail.attributes.body.find("låsvrider") %}
+              Locked inside
+            {% elif states.sensor.verisure_mail.attributes.body.find("fjernstyring") %}
+              locked Home Assistant
+            {% else %}
+              {{states.sensor.last_action.state}}
+            {% endif %}
+          {% elif states.sensor.verisure_mail.attributes.subject == "Låst med stjerne" %}
+            Locked keypad
+          {% else %}
+            {{ states.sensor.verisure_mail.attributes.subject }}
+          {% endif %}
+        attribute_templates:
+          time: >-
+            {{ state_attr('sensor.verisure_mail', 'date') }}

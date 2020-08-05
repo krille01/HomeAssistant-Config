@@ -1,0 +1,9 @@
+input_boolean:
+  ad_presence:
+    name: Presence notify
+
+  ad_error:
+    name: Error Notifyer
+
+  ad_teams:
+    name: Appdaemon Teams 

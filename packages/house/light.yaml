@@ -1,0 +1,543 @@
+#################################################################
+#                                                               #
+#                          Customize                            #
+#                                                               #
+#################################################################
+
+homeassistant:
+  customize:
+    group.downstairs_lights
+      mdi:lightbulb
+    group.living_room_lights
+      mdi:lightbulb
+    group.kitchen_lights
+      mdi:lightbulb
+
+
+
+
+#################################################################
+#                                                               #
+#                           Group                               #
+#                                                               #
+#################################################################
+
+group:
+  downstairs_lights:
+    name: Lys Nede
+    entities:
+      - light.lys_vindfang
+      - light.trapp_etg1
+      - light.lys_mikro
+      - light.lys_spisebord_2
+      - light.lys_stue_2
+      - light.oslo_lampe
+      - light.lys_kjokken_benk
+      
+  living_room_lights:
+    name: Lys Stue
+    entities:
+      - switch.stue
+      - light.oslo_lampe
+
+  kitchen_lights:
+    name: Lys Kjøkken
+    entities:
+      - switch.kjokken_benk_2
+      - light.lys_mikro
+      - light.spisebord
+
+  uppstairs_lights:
+    name: Lys oppe
+    entities:
+      - light.lys_gang_2_etg_2
+      - light.gang_soverom
+
+  master_bedroom_lights:
+    name: Lys Hovedsoverom
+    entities:
+      - light.hovedsoverom
+      - light.night_light_2
+
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+      
+binary_sensor:
+  - platform: template
+    sensors:
+      lights:
+        friendly_name: Lights
+        device_class: light
+        entity_id: group.downstairs_lights
+        value_template: "{{ is_state('group.downstairs_lights', 'on') }}"
+        icon_template: >-
+          {% if is_state('group.downstairs_lights', 'on') %}
+            mdi:lightbulb
+          {% elif is_state('group.downstairs_lights', 'off') %}
+            mdi:lightbulb      
+          {% else %}
+            mdi:alert
+          {% endif %}
+
+#################################################################
+#                                                               #
+#                           Inputs                              #
+#                                                               #
+#################################################################
+
+input_number:
+  stue_brightness:
+    name: Brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+    
+  kjokken_brightness:
+    name: Brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+    
+  hall_brightness:
+    name: Brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+
+  trapp_brightness:
+    name: Brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+
+  lampe_oppe_brightness:
+    name: Brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+
+  bryter_oppe_brightness:
+    name: Brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+
+  taklampe_hovedsoverom_brightness:
+    name: brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+
+  lys_2_etg_brightness:
+    name: brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+
+
+scene:
+
+  - name: Kveld Nede
+    entities:
+      light.lys_stue:
+        state: on
+        brightness_pct: 30
+      light.oslo_lampe:
+        state: on
+        brightness_pct: 50
+      light.lys_kjokken_benk:
+        state: on
+      light.lys_mikro:
+        state: on
+        brightness_pct: 100
+      light.spisebord:
+        state: on
+        brightness_pct: 30
+      light.lys_vindfang:
+        state: on 
+        brightness_pct: 70
+      light.trapp_etg1:
+        state: on
+        brightness_pct: 30
+
+  - name: Dag Nede
+    entities:
+      light.lys_stue:
+        state: off
+      light.oslo_lampe:
+        state: off
+      light.lys_kjokken_benk:
+        state: on
+      light.lys_mikro:
+        state: on
+        brightness_pct: 100
+      light.spisebord:
+        state: off
+      light.lys_vindfang:
+        state: on 
+        brightness_pct: 30
+      light.trapp_etg1:
+        state: off
+
+
+  - name: Livingroom normal
+    entities:
+      light.lys_stue:
+        state: on
+        transition: 2
+        brightness_pct: 60
+        #color_temp: 280
+      light.oslo_lampe:
+        state: on
+        #transition: 2
+        brightness_pct: 85
+        #color_temp: 333
+          
+  - name: Livingroom dim
+    entities:
+      light.lys_stue:
+        state: on
+        transition: 2
+        brightness_pct: 20
+      #  color_temp: 280
+      light.oslo_lampe:
+        state: on
+        transition: 2
+        brightness_pct: 25
+      #  color_temp: 333
+          
+  - name: Hall dim 
+    entities:
+      light.lys_vindfang:
+        state: on
+        transition: 2
+        brightness_pct: 15
+      light.trapp_etg1:
+        state: on
+        transition: 2
+        brightness_pct: 15
+          
+  - name: Hall normal 
+    entities:
+      light.lys_vindfang:
+        state: on
+        transition: 2
+        brightness_pct: 75
+      light.trapp_etg1:
+        state: on
+        transition: 2
+        brightness_pct: 75
+          
+  - name: Hall dusk 
+    entities:
+      light.lys_vindfang:
+        state: on
+        transition: 2
+        brightness_pct: 50
+      light.trapp_etg1:
+        state: on
+        transition: 2
+        brightness_pct: 50
+          
+  - name: Livingroom Bright
+    entities:
+      light.lys_stue:
+        state: on
+        transition: 2
+        brightness_pct: 100
+        #color_temp: 280
+      light.oslo_lampe:
+        state: on
+        #transition: 2
+        brightness_pct: 100
+        #color_temp: 333
+
+  - name: Oppe Bright
+    entities:
+      light.lys_gang_2_etg_2:
+        state: on
+        transition: 2
+        brightness_pct: 100
+        #color_temp: 280
+      light.gang_soverom:
+        state: on
+        #transition: 2
+        brightness_pct: 100
+        #color_temp: 333
+
+  - name: Oppe Normal
+    entities:
+      light.lys_gang_2_etg_2:
+        state: on
+        transition: 2
+        brightness_pct: 75
+        #color_temp: 280
+      light.gang_soverom:
+        state: on
+        #transition: 2
+        brightness_pct: 75
+        #color_temp: 333
+
+  - name: Oppe Dim
+    entities:
+      light.lys_gang_2_etg_2:
+        state: on
+        transition: 2
+        brightness_pct: 20
+        #color_temp: 280
+      light.gang_soverom:
+        state: on
+        #transition: 2
+        brightness_pct: 20
+        #color_temp: 333
+
+  - name: Oppe Night
+    entities:
+      light.lys_gang_2_etg_2:
+        state: on
+        transition: 2
+        brightness_pct: 10
+        #color_temp: 280
+      light.gang_soverom:
+        state: on
+        #transition: 2
+        brightness_pct: 20
+        #color_temp: 333
+
+  - name: Hovedsoverom normal
+    entities:
+      light.hovedsoverom:
+        state: on
+        transistion: 2
+        brightness_pct: 100
+
+  - name: Hovedsoverom bedtime
+    entities:
+      light.hovedsoverom:
+        state: on
+        transistion: 2
+        brightness_pct: 20
+
+  - name: Hovedsoverom night
+    entities:
+      light.hovedsoverom:
+        state: on
+        transistion: 2
+        brightness_pct: 0
+
+
+ 
+  
+#################################################################
+#                                                               #
+#                         Automations                           #
+#                                                               #
+#################################################################
+
+## Some automations for this package have now been moved to Node-RED please see Node-Red Flows folder within this package for more infomation! ##
+
+automation:
+  - alias: Stue Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.stue_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: 
+          - light.lys_stue
+          - light.oslo_lampe
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+  - alias: Spisebord - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.kjokken_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.spisebord
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+  - alias: Gang Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.hall_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.lys_vindfang
+          brightness: "{{ trigger.to_state.state | int }}"
+
+  - alias: Trapp - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.trapp_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.trapp_etg1
+          brightness: "{{ trigger.to_state.state | int }}"
+
+  - alias: lampe oppe - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.lampe_oppe_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.lys_gang_2_etg_2
+          brightness: "{{ trigger.to_state.state | int }}"
+
+  - alias: bryter oppe - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.bryter_oppe_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id:
+          - light.bryter_oppe
+          - light.lys_gang_2_etg_2
+          brightness: "{{ trigger.to_state.state | int }}"
+
+  - alias: Hovedsoverom - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.taklampe_hovedsoverom_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.hovedsoverom
+          brightness: "{{ trigger.to_state.state | int }}"
+
+  - alias: 'toggle lys gang 2 etg'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: transmitter_2_gang
+        event: 1002
+    action:
+      - service: light.toggle
+        entity_id:
+            - light.lys_gang_2_etg_2
+
+  - alias: 'Toggle lys gang soverom'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: transmitter_2_gang
+        event: 2002
+    action:
+      - service: light.toggle
+        entity_id:
+            - light.gang_soverom
+
+  - alias: 'Bryter nede Toggle'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: bryter_1_etg
+        event: 1002
+    action:
+      - service: light.toggle
+        entity_id:
+          - group.downstairs_lights
+
+  - alias: 'Bryter nede dag'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: bryter_1_etg
+        event: 4002
+    action:
+      - service: scene.turn_on
+        entity_id:
+          - scene.dag_nede
+
+  - alias: 'Bryter nede kveld'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: bryter_1_etg
+        event: 5002
+    action:
+      - service: scene.turn_on
+        entity_id:
+          - scene.kveld_nede
+
+
+light:
+  - platform: group
+    name: 'Lights automation'
+    entities:
+      - light.lys_kjokken_benk
+      - light.spisebord
+      - light.lys_mikro
+      - light.lys_stue_2
+      - light.trapp_etg1
+      - light.lys_vindfang
+      - light.oslo_lampe
+
+  - platform: group
+    name: 'Lys Kjøkken'
+    entities:
+      - light.lys_kjokken_benk
+      - light.lys_mikro 
+
+  - platform: switch
+    name: Lys Kjokken benk
+    entity_id: switch.kjokken_benk_2
+
+        
+#   - platform: switch
+#     name: nattbord lampe
+#     entity_id: switch.nattbord
+
+#################################################################
+#                                                               #
+#                           Sensors                             #
+#                                                               #
+#################################################################  
+
+sensor:
+  - platform: template
+    sensors:
+      lights_on:
+        entity_id:
+          - light.gang_soverom_2
+          - light.hovedsoverom
+          - light.light_jakob
+          - light.lys_gang_2_etg_2
+          - light.lys_kjokken
+          - light.lys_spisebord_2
+          - light.lys_stue_2
+          - light.lys_vindfang
+          - light.oslo_lampe
+          - light.soverom_sara
+          - light.trapp_3_etg
+          - light.trapp_etg1
+          - switch.sonoff_mini_relay
+        friendly_name: "Lys på"
+        value_template: "{{ states | selectattr('entity_id','in', ['light.gang_soverom_2','light.hovedsoverom','light.light_jakob','light.lys_gang_2_etg_2','light.lys_kjokken','light.lys_spisebord_2','light.lys_stue_2','light.lys_vindfang','light.oslo_lampe','light.soverom_sara','light.trapp_3_etg','light.trapp_etg1','switch.sonoff_mini_relay'] )|selectattr('state','eq','on') | list | count }}"

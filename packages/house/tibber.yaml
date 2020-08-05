@@ -1,0 +1,140 @@
+sensor:
+  - platform: template
+    sensors:      
+      consumption_thisyear:
+        friendly_name: "Forbruk dette år"
+        unit_of_measurement: 'kWh'
+        value_template: "{{ (state_attr('sensor.real_time_consumption_grenseveien_28', 'lastMeterConsumption') - float(states('input_number.consumption_startofyear'))) | round(1) }}"
+
+      consumption_thismonth:
+        friendly_name: "Forbruk denne måned"
+        unit_of_measurement: 'kWh'
+        value_template: "{{ (state_attr('sensor.real_time_consumption_grenseveien_28', 'lastMeterConsumption') - float(states('input_number.consumption_startofmonth'))) | round(1) }}"
+
+      consumption_thisday:
+        friendly_name: "Forbruk i dag"
+        unit_of_measurement: 'kWh'
+        value_template: "{{ (state_attr('sensor.real_time_consumption_grenseveien_28', 'lastMeterConsumption') - float(states('input_number.consumption_startofday'))) | round(1) }}"
+
+      consumption_lastday:
+        friendly_name: "Forbruk i går"
+        unit_of_measurement: 'kWh'
+        value_template: "{{ float(states('input_number.consumption_lastday')) }}"
+
+      voltage_phase_1:
+        friendly_name: "Spennning Fase 1"
+        unit_of_measurement: 'V'
+        value_template: "{{ state_attr('sensor.real_time_consumption_grenseveien_28', 'voltagePhase1') }}"
+
+      voltage_phase_2:
+        friendly_name: "Spennning Fase 2"
+        unit_of_measurement: 'V'
+        value_template: "{{ state_attr('sensor.real_time_consumption_grenseveien_28', 'voltagePhase2') }}"
+
+      voltage_phase_3:
+        friendly_name: "Spennning Fase 3"
+        unit_of_measurement: 'V'
+        value_template: "{{ state_attr('sensor.real_time_consumption_grenseveien_28', 'voltagePhase3') }}"
+
+      current_phase_1:
+        friendly_name: "Støm Fase 1"
+        unit_of_measurement: 'A'
+        value_template: "{{ state_attr('sensor.real_time_consumption_grenseveien_28', 'currentL1') }}"
+
+      current_phase_2:
+        friendly_name: "Støm Fase 2"
+        unit_of_measurement: 'A'
+        value_template: "{{ state_attr('sensor.real_time_consumption_grenseveien_28', 'currentL2') }}"
+
+      current_phase_3:
+        friendly_name: "Støm Fase 3"
+        unit_of_measurement: 'A'
+        value_template: "{{ state_attr('sensor.real_time_consumption_grenseveien_28', 'currentL3') }}"
+
+input_number:
+  consumption_startofyear:
+    name: Målerstand start på år
+    max: 999999999
+    min: 0
+    step: 0.1
+    mode: box
+    unit_of_measurement: 'kWh'
+    icon: mdi:counter
+  consumption_startofmonth:
+    name: Målerstand start på måned
+    max: 999999999
+    min: 0
+    step: 0.1
+    mode: box
+    unit_of_measurement: 'kWh'
+    icon: mdi:counter
+  consumption_startofday:
+    name: Målerstand start på dag
+    max: 999999999
+    min: 0
+    step: 0.1
+    mode: box
+    unit_of_measurement: 'kWh'
+    icon: mdi:counter
+  consumption_lastday:
+    name: Forbruk forrige dag
+    max: 999999999
+    min: 0
+    step: 0.1
+    mode: box
+    unit_of_measurement: 'kWh'
+    icon: mdi:counter
+
+automation:
+- id: manedsskifte
+  alias: Månedsskifte
+  description: ''
+  trigger:
+  - at: 0:30:00
+    platform: time
+  condition:
+  - condition: template
+    value_template: '{{ now().day == 1 }}'
+  action:
+  - alias: ''
+    data_template:
+      value: '{{ state_attr(''sensor.real_time_consumption_grenseveien_28'',
+        ''lastMeterConsumption'') }}'
+      entity_id: input_number.consumption_startofmonth
+    service: input_number.set_value
+- id: aarsskifte
+  alias: Årsskifte
+  description: ''
+  trigger:
+  - at: 0:30:00
+    platform: time
+  condition:
+  - condition: template
+    value_template: '{{ now().day == 1 and now().month == 1 }}'
+  action:
+  - alias: ''
+    data_template:
+      value: '{{ state_attr(''sensor.real_time_consumption_grenseveien_28'',
+        ''lastMeterConsumption'') }}'
+      entity_id: input_number.consumption_startofyear
+    service: input_number.set_value
+- id: dagskifte
+  alias: Dagskifte
+  description: ''
+  trigger:
+  - at: 0:05:00
+    platform: time
+  action:
+  - alias: ''
+    data_template:
+      entity_id: input_number.consumption_lastday
+      value: '{{ (state_attr(''sensor.real_time_consumption_grenseveien_28'',
+        ''lastMeterConsumption'') - float(states(''input_number.consumption_startofday'')))
+        | round(1) }}'
+    service: input_number.set_value
+  - alias: ''
+    data_template:
+      entity_id: input_number.consumption_startofday
+      value: '{{ state_attr(''sensor.real_time_consumption_grenseveien_28'',
+        ''lastMeterConsumption'') }}'
+    service: input_number.set_value

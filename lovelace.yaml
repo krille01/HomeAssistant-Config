@@ -1,0 +1,19 @@
+mode: yaml
+  # Include external resources only add when mode is yaml, otherwise manage in the resources in the lovelace configuration panel.
+resources: !include lovelace/resources.yaml
+
+dashboards:
+  ui-dashboard: # Needs to contain a hyphen (-)
+    mode: yaml
+    filename: ui-dashboard.yaml
+    title: Tablet-Dashboard
+    icon: mdi:tablet-dashboard
+    show_in_sidebar: true
+    require_admin: false
+  dev-yaml-dash:
+    mode: yaml
+    filename: dev-yaml.yaml
+    title: Dev-Yaml
+    icon: mdi:tools
+    show_in_sidebar: true
+    require_admin: true

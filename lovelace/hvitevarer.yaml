@@ -1,0 +1,131 @@
+#############################################################################################################################################
+#                                                                                                                                           # 
+#                                                         VIEW 9 - HVITEVARER                                                               #
+#                                                                                                                                           #
+#############################################################################################################################################  
+title: Hvtevarer
+background: center / cover no-repeat url("/local/lovelace/background_spurs_01.jpg") fixed
+icon: mdi:washing-machine
+path: hvitevarer
+theme: midnight
+cards:
+
+#################################################################
+#                                                               #
+#                 Appliances -  RoboVac Card                    #
+#                                                               #
+#################################################################  
+
+        - type: vertical-stack
+          cards:
+                - type: picture-elements
+                  image: /local/lovelace/hvitevarer/roomba_vacume.jpg
+                  elements:
+                    - type: icon
+                      icon: mdi:home
+                      entity_id: switch.roomba
+                      style: {color: white, left: 60%, top: 90%}
+
+                    - type: icon
+                      icon: mdi:play
+#                     tap_action: 
+#                       action: switch.turn_on
+#                       service_data:
+                      entity_id: switch.roomba
+                      style: {color: white, left: 40%, top: 90%}
+
+                    - type: state-label
+                      entity: sensor.roomba_status
+                      style:
+                        top: 12%
+                        left: 5%
+                        color: rgb(255, 255, 255)
+                        transform: translate(0%,-50%)
+                        pointer-events: none
+                        text-shadow: 1px 1px black
+                        font-family: Trebuchet MS
+                        font-size: 90%
+                        font-weight: bold
+                        border-left-style: solid
+                        border-right-style: solid
+                        border-color: rgb(34, 154, 210)
+                        background-color: rgb(54, 65, 78)
+                        border-radius: 10px
+                        opacity: 0.8
+
+                    - type: state-label
+                      entity: sensor.roomba_battery
+                      style:
+                        top: 12%
+                        right: 5%
+                        color: rgb(255, 255, 255)
+                        transform: translate(0%,-50%)
+                        pointer-events: none
+                        text-shadow: 1px 1px black
+                        font-family: Trebuchet MS
+                        font-size: 90%
+                        font-weight: bold
+                        border-left-style: solid
+                        border-right-style: solid
+                        border-color: rgb(34, 154, 210)
+                        background-color: rgb(54, 65, 78)
+                        border-radius: 10px
+                        opacity: "0.8"
+                #  style:
+                #  border-radius: 8px
+
+        - type: vertical-stack
+          cards:
+#            - type: entities
+#              show_header_toggle: off
+#              entities:
+#                - type: 'custom:text-divider-row'
+#                  text: Vaskemaskin/Oppvaskmaskin
+#                - type: custom:vertical-stack-in-card
+#                  cards:
+#                    - type: horizontal-stack
+#                      cards:
+#                        - type: custom:card-mod
+#                          card:
+#                            type: "custom:button-card"
+#                            entity: switch.vaskemaskin
+#                            name: Washer
+#                            tap_action:
+#                              action: toggle
+#                            size: '20%'
+#                            style:
+#                              - font-size: 14px
+#                          style:                 
+#                            border-radius: 8px
+#                            
+#                        - type: "custom:button-card"
+#                          color_type: blank-card
+#        
+#                        - type: custom:card-mod
+#                          card:
+#                            type: "custom:button-card"
+#                            entity: switch.oppvaskmaskin
+#                            name: Dryer
+#                            tap_action:
+#                              action: toggle
+#                            size: '20%'
+#                            style:
+#                              - font-size: 14px
+#                          style:                 
+#                            border-radius: 8px
+#                            
+                - type: custom:bar-card
+                  title_position: on
+                  title: Status
+                  align: center
+                  padding: 4px
+                  card_style: 
+                    border-radius: 5px
+                  columns: 2
+                  #color: '#bf4040'
+                  entities:
+                    - entity: sensor.washing_machine_status
+                    - entity: sensor.dish_machine_status
+                    
+
+    

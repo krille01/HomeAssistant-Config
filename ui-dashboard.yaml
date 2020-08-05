@@ -1,0 +1,14 @@
+custom_header:
+  elements_color: var(--primary-text-color);
+  tab_indicator_color: var(--primary-text-color);
+  background: var(--primary-background-color);
+  compact_mode: true
+#  kiosk_mode: true
+
+button_card_templates:
+  !include lovelace/button_card_templates/button_card_templates.yaml
+
+views:
+  - !include lovelace/ui-tablet/tablet_home.yaml
+  - !include lovelace/ui-tablet/tablet_light.yaml
+  - !include lovelace/ui-tablet/tablet_person.yaml

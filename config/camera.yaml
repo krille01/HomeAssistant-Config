@@ -1,0 +1,4 @@
+- platform: generic
+  name: Streaming Enabled
+  still_image_url: !secret camera_url
+  

@@ -1,0 +1,12 @@
+min_renovasjon:
+  street_name: !secret streetname
+  house_no: "28"
+  street_code: "2220"
+  county_id: "3021"
+  date_format: "None"
+
+sensor:
+  - platform: min_renovasjon
+    fraction_id:
+      - 1
+      - 2

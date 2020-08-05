@@ -1,0 +1,172 @@
+#############################################################################################################################################
+#                                                                                                                                           # 
+#                                                     VIEW 3 - MASTER BEDROOM                                                               #
+#                                                                                                                                           #
+#############################################################################################################################################  
+title: 1 etg
+background: center / cover no-repeat url("/local/lovelace/background_spurs_01.jpg") fixed
+icon: mdi:hotel
+path: master_bedrrom
+theme: transparent
+cards:
+#################################################################
+#                                                               #
+#         Master Bedroom - Temperature Graph Card               #
+#                                                               #
+#################################################################
+    - type: vertical-stack
+      cards:
+        - type: custom:mini-graph-card
+          entities: 
+            - sensor.temp_sensor_hovedsoverom_2
+          height: 65
+          line_width: 2
+          font_size: 70
+          hours_to_show: 168
+          points_per_hour: 1
+          show:
+            #extrema: true
+            fill: true
+            #graph: bar
+          color_thresholds:
+            - value: 28
+              color: "#e74c3c"
+            - value: 15
+              color: "#1db954"
+            - value: 0
+              color: "#3498db"
+
+#################################################################
+#                                                               #
+#               Master Bedroom - Light Group Card               #
+#                                                               #
+#################################################################
+
+        - type: picture-entity
+          entity: group.master_bedroom_lights
+          name: Lys
+          tap_action: 
+            action: toggle
+          image: /local/lovelace/bedrooms/bed-light.jpg
+
+#################################################################
+#                                                               #
+#                Master Bedroom - Main Light Card               #
+#                                                               #
+#################################################################
+
+        - type: horizontal-stack
+          cards:
+            - type: picture-entity
+              entity: light.hovedsoverom
+              name: Taklampe
+              tap_action: 
+                action: toggle
+              image: /local/lovelace/bedrooms/main-bed-light_2.jpg
+
+#################################################################
+#                                                               #
+#              Master Bedroom - Bedside lamp Card              #
+#                                                               #
+#################################################################
+
+            - type: picture-entity
+              entity: light.night_light_2
+              name: Nattbords lampe
+              tap_action: 
+                action: toggle
+              image: /local/lovelace/bedrooms/walk-in-light_2.jpg
+
+#################################################################
+#                                                               #
+#              Master Bedroom - Humidity Graph Card             #
+#                                                               #
+#################################################################
+
+    - type: vertical-stack
+      cards:
+        - type: custom:mini-graph-card
+          entities: 
+            - sensor.temp_sensor_hovedsoverom_3
+          height: 65
+          line_width: 2
+          font_size: 70
+          hours_to_show: 168
+          points_per_hour: 1
+          show:
+            #extrema: true
+            fill: true
+            #graph: bar
+          color_thresholds:
+            - value: 70
+              color: "#e74c3c"
+            - value: 40
+              color: "#1db954"
+            - value: 0
+              color: "#3498db"
+
+#################################################################
+#                                                               #
+#                   Master Bedroom - Zip Screen                 #
+#                                                               #
+#################################################################
+        - type: picture-glance
+          entities:
+            - cover.gardin_hovedsoverom
+          image: /local/lovelace/bedrooms/solskjerm.jpg
+          
+
+
+#################################################################
+#                                                               #
+#               Master Bedroom - Media Player Card              #
+#                                                               #
+#################################################################
+
+        - type: entities
+          style: | 
+            ha-card {
+              color: white;
+              background-image: url("/local/lovelace/cardbackK.png");
+              background-repeat: no-repeat;
+              background-color: rgba(50,50,50,0.3);
+              background-size: 100%
+            }
+            .card-content {
+              padding: 0
+            }
+          entities:
+          - type: custom:mini-media-player
+            entity: media_player.home_hovedsoverom
+            name: Google Home Soverom
+            artwork: cover
+            power_color: true
+            show_source: true
+            show_progress: true
+            group: true
+
+#################################################################
+#                                                               #
+#                Master Bedroom - Light Bulb Card               #
+#                                                               #
+#################################################################
+
+        - type: custom:gap-card
+          height: 4
+          size:
+          
+        - type: entities
+          style: | 
+            ha-card {
+              color: white;
+              background-image: url("/local/lovelace/cardbackK.png");
+              background-repeat: no-repeat;
+              background-color: rgba(50,50,50,0.3);
+              background-size: 100%
+            }
+            .card-content {
+              padding: 0
+            }
+          entities:
+            - type: custom:slider-entity-row
+              entity: light.hovedsoverom

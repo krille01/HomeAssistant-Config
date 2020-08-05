@@ -1,0 +1,53 @@
+#############################################################################################################################################
+#                                                                                                                                           # 
+#                                                       VIEW 5 - SARA BEDROOM                                                               #
+#                                                                                                                                           #
+#############################################################################################################################################  
+title: Sara
+background: center / cover no-repeat url("/local/lovelace/background_spurs_01.jpg") fixed
+icon: mdi:human-female-girl
+path: sara
+theme: transparent
+cards:
+
+#################################################################
+#                                                               #
+#               Master Bedroom - Light Group Card               #
+#                                                               #
+#################################################################
+    - type: vertical-stack
+      cards:
+        - type: picture-entity
+          entity: light.soverom_sara
+          name: Lys
+          tap_action: 
+            action: toggle
+          image: /local/lovelace/bedrooms/bed-light.jpg
+
+#################################################################
+#                                                               #
+#               Master Bedroom - Media Player Card              #
+#                                                               #
+#################################################################
+
+        - type: entities
+          style: | 
+            ha-card {
+              color: white;
+              background-image: url("/local/lovelace/cardbackK.png");
+              background-repeat: no-repeat;
+              background-color: rgba(50,50,50,0.3);
+              background-size: 100%
+            }
+            .card-content {
+              padding: 0
+            }
+          entities:
+          - type: custom:mini-media-player
+            entity: media_player.googlehome4056
+            name: Google Home Sara
+            artwork: cover
+            power_color: true
+            show_source: true
+            show_progress: true
+            group: true

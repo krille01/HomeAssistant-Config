@@ -1,0 +1,8 @@
+
+  host: 192.168.86.72
+  port: 8086
+  database: homeassistant
+  username: homeassistant
+  password: !secret infux_pass
+  max_retries: 3
+  default_measurement: state

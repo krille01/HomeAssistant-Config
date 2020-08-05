@@ -1,0 +1,14 @@
+# Broadlink RM3
+- platform: mqtt
+  command_topic: broadlink/rmpro
+  name: "Gardin Hovedsoverom"
+  payload_open: "12"
+  payload_close: "10"
+  payload_stop: "11"
+
+- platform: mqtt
+  command_topic: broadlink/rmpro
+  name: "Gardin Soverom Sara"
+  payload_open: "15"
+  payload_close: "13"
+  payload_stop: "14"

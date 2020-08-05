@@ -1,0 +1,216 @@
+title: Home
+# background: center / cover no-repeat url('/local/lovelace/background_spurs_01.jpg') fixed
+icon: mdi:home
+path: home
+
+cards:
+##############################################################
+#                    Search                                  #
+##############################################################
+      - type: vertical-stack
+        cards:
+          - cards:
+              - content: |
+                  # Søk
+                style:
+                  .: |
+                    ha-card {
+                      --paper-card-background-color: none !important;;
+                      box-shadow: none !important;
+                      height: 30px;
+                    }
+                  ha-markdown:
+                    $: |
+                      h1 {
+                        font-size: 20px;
+                        font-weight: bold;
+                        font-family: Helvetica;
+                        letter-spacing: '-0.01em';
+                      }
+                type: markdown
+            type: vertical-stack
+          - type: 'custom:search-card'
+            style: |
+              ha-card {
+                  background-color: var(--primary-background-color);
+                  border-radius: 15px;
+                  margin: 10px;
+                  box-shadow: 
+                    {% if is_state('sun.sun', 'above_horizon') %}
+                      -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                    {% else %}
+                      -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                    {% endif %}   
+                  }
+################################################################
+#                  Hjem                                        #
+################################################################
+          - cards:
+              - content: |
+                  # Hjem Skjerm
+                style:
+                  .: |
+                    ha-card {
+                      --paper-card-background-color: none !important;;
+                      box-shadow: none !important;
+                      height: 30px;
+                    }
+                  ha-markdown:
+                    $: |
+                      h1 {
+                        font-size: 20px;
+                        font-weight: bold;
+                        font-family: Helvetica;
+                        letter-spacing: '-0.01em';
+                      }
+                type: markdown
+            type: vertical-stack
+
+###################################################################
+#                         Lights                                  #
+###################################################################
+
+          - cards:
+              - cards:
+                  - cards:
+                      - icon: 'mdi:lightbulb-multiple'
+                        show_icon: true
+                        show_name: false
+                        style: |
+                          ha-card {
+                            margin: 10px;
+                            box-shadow: 
+                              {% if is_state('sun.sun', 'above_horizon') %}
+                                -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                              {% elif is_state('sun.sun', 'below_horizon') %}
+                                -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                              {% endif %}                 
+                          }
+                        styles:
+                          card:
+                            - width: 80px
+                            - height: 80px
+                            - border-radius: 15px
+                            - background-color: var(--primary-background-color)
+                          icon:
+                            - color: var(--primary-text-color)
+                        tap_action:
+                          action: navigate
+                          navigation_path: /ui-dashboard/lights
+                          haptic: light
+                        type: 'custom:button-card'
+                      - cards:
+                          - content: |
+                              # Lys
+                            style:
+                              .: |
+                                ha-card {
+                                  --paper-card-background-color: none !important;;
+                                  box-shadow: none !important;
+                                  height: 20px;
+                                }
+                              ha-markdown:
+                                $: |
+                                  h1 {
+                                    font-size: 20px;
+                                    font-weight: bold;
+                                    font-family: Helvetica;
+                                    letter-spacing: '-0.01em';
+                                  }
+                            type: markdown
+                          - content: >
+                              # Det er  {% if is_state('sensor.lights_on',
+                              '0') %} ikke noe  {% else %} 
+                              {{states('sensor.lights_on')}}  {% endif %} lys
+                              på
+                            style:
+                              .: |
+                                ha-card {
+                                  --paper-card-background-color: none !important;;
+                                  box-shadow: none !important;
+                                  height: 20px;
+                                }
+                              ha-markdown:
+                                $: |
+                                  h1 {
+                                    font-size: 15px;
+                                    font-weight: thin;
+                                    font-family: Helvetica;
+                                    letter-spacing: '-0.01em';
+                                  }
+                            type: markdown
+                        type: vertical-stack
+                    type: horizontal-stack
+##########################################################################################
+#                            Person                                                      #
+##########################################################################################
+                  - cards:
+                      - icon: 'mdi:account-multiple'
+                        show_icon: true
+                        show_name: false
+                        style: |
+                          ha-card {
+                            margin: 10px;
+                            box-shadow: 
+                              {% if is_state('sun.sun', 'above_horizon') %}
+                                -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                              {% elif is_state('sun.sun', 'below_horizon') %}
+                                -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                              {% endif %}   
+                          }
+                        styles:
+                          card:
+                            - width: 80px
+                            - height: 80px
+                            - border-radius: 15px
+                            - background-color: var(--primary-background-color)
+                          icon:
+                            - color: var(--primary-text-color)
+                        tap_action:
+                          action: navigate
+                          navigation_path: /ui-dashboard/person
+                          haptic: light
+                        type: 'custom:button-card'
+                      - cards:
+                          - content: |
+                              # Personer
+                            style:
+                              .: |
+                                ha-card {
+                                  --paper-card-background-color: none !important;;
+                                  box-shadow: none !important;
+                                  height: 20px;
+                                }
+                              ha-markdown:
+                                $: |
+                                  h1 {
+                                    font-size: 20px;
+                                    font-weight: bold;
+                                    font-family: Helvetica;
+                                    letter-spacing: '-0.01em';
+                                  }
+                            type: markdown
+                          - content: >
+                              # Det er  {% if is_state('sensor.person_home',
+                              '0') %} ikke noen  {% elif is_state('sensor.person_home',
+                              '1') %} 1 person hjemme  {% else %}  {{states('sensor.person_home')}} peroner hjemme  {% endif %}
+                              nå
+                            style:
+                              .: |
+                                ha-card {
+                                  --paper-card-background-color: none !important;;
+                                  box-shadow: none !important;
+                                }
+                              ha-markdown:
+                                $: |
+                                  h1 {
+                                    font-size: 15px;
+                                    font-weight: thin;
+                                    font-family: Helvetica;
+                                    letter-spacing: '-0.01em';
+                                  }
+                            type: markdown
+                        type: vertical-stack
+                    type: horizontal-stack
+                type: vertical-stack
+            type: vertical-stack

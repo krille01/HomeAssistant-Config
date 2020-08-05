@@ -1,0 +1,381 @@
+#############################################################################################################################################
+#                                                                                                                                           # 
+#                                                          VIEW 10 - SYSTEM STATUS                                                          #
+#                                                                                                                                           #
+#############################################################################################################################################    title: Test
+title: System Status
+background: center / cover no-repeat url("/local/lovelace/background_spurs_01.jpg") fixed
+icon: mdi:settings
+path: system status
+theme: transparent
+cards:
+#################################################################
+#                                                               #
+#                  System Status - Internet Card                #
+#                                                               #
+#################################################################
+
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:bar-card
+                title_position: inside
+                show_icon: true
+                align: split
+                padding: 4px
+                card_style: 
+                  border-radius: 5px
+                columns: 1
+                entities:
+                  - entity: sensor.tpg_nbn
+                    icon: mdi:earth
+
+              - type: custom:bar-card
+                title_position: inside
+                show_icon: true
+                align: split
+                padding: 4px
+                card_style: 
+                  border-radius: 5px
+                columns: 1
+                max: 100
+                entities:
+                  - entity: sensor.speedtest_ping
+                    severity:
+                    - value: 20
+                      color: '#1db954'
+                    - value: 30
+                      color: '#bf9540'
+                    - value: 50
+                      color: '#bf4040'    
+
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities: 
+                  - sensor.speedtest_download
+                height: 50
+                line_width: 2
+                font_size: 70
+                hours_to_show: 168
+                points_per_hour: 1
+                show:
+                  extrema: true
+                  fill: true
+                color_thresholds:
+                  - value: 0
+                    color: "#FFFF00"
+                  - value: 40
+                    color: "#3498db"
+                    
+              - type: custom:mini-graph-card
+                entities: 
+                  - sensor.speedtest_upload
+                height: 50
+                line_width: 2
+                font_size: 70
+                hours_to_show: 168
+                points_per_hour: 1
+                show:
+                  extrema: true
+                  fill: true
+                color_thresholds:
+                  - value: 0
+                    color: "#FFFF00"
+                  - value: 13
+                    color: "#3498db"
+
+#################################################################
+#                                                               #
+#                System Status - Statistics Card                #
+#                                                               #
+#################################################################
+
+          - type: entities
+            show_header_toggle: off
+            entities:
+              - type: section
+                label: HOME ASSISTANT STATISTICS
+              - type: custom:vertical-stack-in-card
+                cards:
+                  #- type: 'custom:text-divider-row'
+                  #  text: Statistics
+
+                  - type: horizontal-stack
+                    cards:          
+                      - type: custom:bar-card
+                        title: Automations
+                        entity: sensor.automation_count
+                        title_position: inside
+                        align: center
+                        padding: 4px
+                        card_style: 
+                          border-radius: 5px
+                        max: 98
+                        severity:
+                        - value: 38
+                          color: '#bf4040'
+                        - value: 98
+                          color: '#1db954'
+                        - value: 100
+                          color: '#bf9540'
+
+                      - type: custom:bar-card
+                        title: Binary Sensors
+                        entity: sensor.binary_sensor_count
+                        title_position: inside
+                        align: center
+                        padding: 4px
+                        card_style: 
+                          border-radius: 5px
+                        max: 14
+                        severity:
+                        - value: 5
+                          color: '#bf4040'
+                        - value: 14
+                          color: '#1db954'
+                        - value: 20
+                          color: '#bf9540'
+
+                  - type: horizontal-stack
+                    cards:          
+                      - type: custom:bar-card
+                        title: Lys
+                        entity: sensor.lights_count
+                        title_position: inside
+                        align: center
+                        padding: 4px
+                        card_style: 
+                          border-radius: 5px
+                        max: 26
+                        severity:
+                        - value: 10
+                          color: '#bf4040'
+                        - value: 26
+                          color: '#1db954'
+                        - value: 30
+                          color: '#bf9540'
+
+                      - type: custom:bar-card
+                        title: Brytere
+                        entity: sensor.switch_count
+                        title_position: inside
+                        align: center
+                        padding: 4px
+                        card_style: 
+                          border-radius: 5px
+                        max: 16
+                        severity:
+                        - value: 10
+                          color: '#bf4040'
+                        - value: 16
+                          color: '#1db954'
+                        - value: 30
+                          color: '#bf9540'
+
+                  - type: horizontal-stack
+                    cards:          
+                      - type: custom:bar-card
+                        title: Media Players
+                        entity: sensor.media_player_count
+                        title_position: inside
+                        align: center
+                        padding: 4px
+                        card_style: 
+                          border-radius: 5px
+                        max: 8
+                        severity:
+                        - value: 5
+                          color: '#bf4040'
+                        - value: 8
+                          color: '#1db954'
+                        - value: 20
+                          color: '#bf9540'
+
+                      - type: custom:bar-card
+                        title: Tracked things
+                        entity: sensor.tracker_count
+                        title_position: inside
+                        align: center
+                        padding: 4px
+                        card_style: 
+                          border-radius: 5px
+                        max: 37
+                        severity:
+                        - value: 15
+                          color: '#bf4040'
+                        - value: 37
+                          color: '#1db954'
+                        - value: 40
+                          color: '#bf9540'
+
+                  - type: custom:bar-card
+                    title: HA Database
+                    entity: sensor.hass_db_size
+                    icon: mdi:database
+                    #title_position: inside
+                    align: split
+                    show_icon: true
+                    padding: 4px
+                    card_style: 
+                      border-radius: 5px
+                    max: 400
+                    severity:
+                    - value: 100
+                      color: '#1db954'
+                    - value: 200
+                      color: '#bf9540'
+                    - value: 400
+                      color: '#bf4040'
+
+                  - type: custom:bar-card
+                    title: HA Logfile
+                    entity: sensor.home_assistant_log
+                    icon: mdi:database
+                    #title_position: inside
+                    align: split
+                    show_icon: true
+                    padding: 4px
+                    card_style: 
+                      border-radius: 5px
+                    max: 10
+                    severity:
+                    - value: 1
+                      color: '#1db954'
+                    - value: 5
+                      color: '#bf9540'
+                    - value: 10
+                      color: '#bf4040'
+
+#################################################################
+#                                                               #
+#         System Status - HP Server Resources Card              #
+#                                                               #
+#################################################################
+
+      - type: vertical-stack
+        cards:    
+            - type: picture-elements
+              image: /local/lovelace/settings/hass.jpg
+              title: --------------- HASSIO SERVER - HP i3 ---------------- -------- Ubuntu 18.04.1 LTS - HA 0.107.6 --------
+              elements:
+                - type: custom:bar-card
+                  entity: sensor.time_online
+                  name: Up Time this Week
+                  align: center
+                  padding: 9px
+                  max: 168
+                  style:
+                    top: 70%
+                    left: 55%
+                    width: 60%
+
+            - type: custom:bar-card
+              align: split
+              show_icon: true
+              padding: 4px
+              columns: 2
+              card_style: 
+                border-radius: 5px
+              entities:
+                - entity: sensor.disk_use_percent
+                  title: Disk
+                - entity: sensor.memory_use_percent
+                  title: RAM
+            - type: custom:bar-card
+              align: split
+              show_icon: true
+              padding: 4px
+              columns: 2
+              card_style: 
+                border-radius: 5px
+              entities:
+                - entity: sensor.processor_use
+                  title: CPU
+                - entity: sensor.nuc_cpu_temp
+                  title: Temp  
+                  icon: mdi:thermometer
+
+#################################################################
+#                                                               #
+#           System Status - Router Card Google Wifi             #
+#                                                               #
+#################################################################
+
+            - type: entities
+              show_header_toggle: off
+              entities:
+                - type: section 
+                  label: ROUTER - Google wifi
+                - type: custom:vertical-stack-in-card
+                  cards:
+                    - type: horizontal-stack
+                      cards:
+                        - type: picture
+                          image: /local/lovelace/settings/google-wifi.jpg
+
+                        - type: custom:bar-card
+                          title_position: inside
+                          show_icon: true
+                          align: center
+                          padding: 4px
+                          card_style: 
+                            border-radius: 5px
+                          columns: 1
+                          entities:
+                            - entity: sensor.core_router_uptime
+                              name: Uptime
+                              icon: mdi:clock
+                            - entity: sensor.core_router_new_version
+                              name: Version
+#################################################################
+#                                                               #
+#                System Status - Core Devices Card              #
+#                                                               #
+#################################################################
+
+      - type: entities
+        show_header_toggle: off
+        entities:
+          - type: section 
+            label: DEVICE STATUS
+
+      - type: custom:bar-card
+        title_position: inside
+        align: center
+        padding: 4px
+        card_style: 
+          border-radius: 5px
+        columns: 2
+        entities:
+          - entity: sensor.sonoff_rf_bridge_state
+            title: Sonoff RF Bridge
+            show_value: false
+          - entity: sensor.telldus_bridge_state
+            title: Tellstick
+            show_value: false
+          - entity: sensor.3d_printer_state
+            title: 3d Printer
+            show_value: false
+          - entity: sensor.broadlink_rm_soverom_state
+            title: Broadlink Soverom
+            show_value: false
+          - entity: sensor.broadlink_ir_stue_state
+            title: Broadlink Stue
+            show_value: false
+        severity:
+        - value: 50
+          color: '#bf4040'
+        - value: 100
+          color: '#1db954'
+
+      - type: custom:vertical-stack-in-card
+        title: Pakker På Veg
+        cards:
+          - type: custom:auto-entities
+            card:
+              type: entities
+            filter:
+              include:
+                - entity_id: "sensor.seventeentrack_package_*"

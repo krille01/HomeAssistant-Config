@@ -1,0 +1,4 @@
+sensor:
+  - platform: seventeentrack
+    username: !secret seventeentracku
+    password: !secret seventeentrackpw

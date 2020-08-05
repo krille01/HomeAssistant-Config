@@ -1,0 +1,19 @@
+custom_header:
+  compact_mode: true
+  hide_unused: true
+  hide_config: true
+
+button_card_templates:
+  !include lovelace/button_card_templates/button_card_templates.yaml
+
+decluttering_templates:
+  !include lovelace/decluttering_templates/decluttering_templates.yaml
+
+title: My Awsome Home
+
+views:
+  - !include lovelace/home.yaml
+  - !include lovelace/dev/dev_power.yaml
+  - !include lovelace/dev/dash_test.yaml
+  - !include lovelace/dev/dev_light.yaml
+  - !include lovelace/dev/dev_person.yaml

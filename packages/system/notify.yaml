@@ -1,0 +1,30 @@
+telegram_bot:
+  - platform: polling
+    api_key: !secret bot_father
+    allowed_chat_ids:
+      - "956698324"  #My
+      - "-379312964" #Normal
+      - "-344278824" #Appdaemon
+      - "-426922661" #Door Lock
+
+notify:
+  - name: Home_assistant
+    platform: telegram
+    chat_id: '956698324'
+
+  - name: Normal
+    platform: telegram
+    chat_id: '-379312964'
+
+  - name: Appdaemon
+    platform: telegram
+    chat_id: "-344278824"
+
+  - name: Door Lock
+    platform: telegram
+    chat_id: "-426922661"
+
+  - name: slack
+    platform: slack
+    api_key: !secret slack_key
+    default_channel: '#home-automation'

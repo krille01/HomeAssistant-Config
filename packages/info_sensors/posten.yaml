@@ -1,0 +1,8 @@
+sensor:
+  - platform: rest
+    resource: https://www.posten.no/levering-av-post-2020/_/component/main/1/leftRegion/1?postCode=1406
+    headers:
+      x-requested-with: XMLHttpRequest
+    name: leveringsdag_for_post
+    scan_interval: 21600
+    value_template: '{{ value_json.nextDeliveryDays[0] }}'

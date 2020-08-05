@@ -1,0 +1,323 @@
+title: Personer
+icon: mdi:account-multiple
+path: person
+
+
+cards:
+      - type: vertical-stack
+        cards:
+          - cards:
+              - content: >
+                  # Det er  {% if is_state('sensor.person_home',
+                  '0') %} ikke noen  {% elif is_state('sensor.person_home',
+                  '1') %} 1 person hjemme  {% else %}  {{states('sensor.person_home')}} peroner hjemme  {% endif %}
+                  nå
+                style:
+                  .: |
+                    ha-card {
+                      --paper-card-background-color: none !important;;
+                      box-shadow: none !important;
+                      height: 50px;
+                    }
+                  ha-markdown:
+                    $: |
+                      h1 {
+                        font-size: 20px;
+                        font-weight: bold;
+                        font-family: Helvetica;
+                        letter-spacing: '-0.01em';
+                      }
+                type: markdown
+            type: vertical-stack
+          - cards:
+#######################################################################
+#                 Kristian                                            #
+#######################################################################
+              - entity: person.kristian
+                template: nest_picture_button
+                entity_picture: /local/picture/kristian.png
+                style: |
+                  ha-card {
+                    margin: 5px;  
+                    margin-left: 6.5px;
+                    box-shadow: 
+                      {% if is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'on') %}
+                        inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'off') %}                      
+                        -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'on') %}                      
+                        inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3); 
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'off') %}   
+                        -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                      {% endif %}                      
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 80px
+                    - height: 80px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                type: 'custom:button-card'
+####################################################################
+#                      Lill Venke                                  #
+####################################################################
+              - entity: person.lill_venke
+                template: nest_picture_button
+                entity_picture: /local/picture/lill-venke.png
+                style: |
+                  ha-card {
+                    margin: 5px;  
+                    margin-left: 6.5px;
+                    box-shadow: 
+                      {% if is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'on') %}
+                        inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'off') %}                      
+                        -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'on') %}                      
+                        inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3); 
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'off') %}   
+                        -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                      {% endif %}                      
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 80px
+                    - height: 80px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                type: 'custom:button-card'
+##################################################################
+#                    Samuel                                      #
+##################################################################
+              - entity: sensor.samuel
+                template: nest_picture_button
+                entity_picture: /local/picture/samuel.png
+                style: |
+                  ha-card {
+                    margin: 5px;  
+                    margin-left: 6.5px;
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 80px
+                    - height: 80px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                type: 'custom:button-card'
+#######################################################################
+#                          Jakob                                      #
+#######################################################################
+              - entity: sensor.jakob
+                template: nest_picture_button
+                entity_picture: /local/picture/jakob.png
+                style: |
+                  ha-card {
+                    margin: 5px;  
+                    margin-left: 6.5px;
+                    }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 80px
+                    - height: 80px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                type: 'custom:button-card'
+
+            type: horizontal-stack
+############################################################################################
+#                       Lock Button                                                        #
+############################################################################################
+          - cards:
+              - cards:
+                  - cards:
+                      - entity: lock.gang
+                        icon: 'mdi:lock'
+                        show_icon: true
+                        show_name: false
+                        show_state: false
+                        state:
+                            - value: "locked"
+                              color: rgb(255, 8, 8)
+                              icon: mdi:lock
+                            - value: 'unlocked'
+                              color: rgb(15, 141, 15)
+                              icon: mdi:lock-open
+                        style: |
+                          ha-card {
+                            margin: 10px;
+                            box-shadow: 
+                              {% if is_state('sun.sun', 'above_horizon') %}
+                                -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                              {% elif is_state('sun.sun', 'below_horizon') %}
+                                -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                              {% endif %}                 
+                          }
+                        styles:
+                          card:
+                            - width: 80px
+                            - height: 80px
+                            - border-radius: 15px
+                            - background-color: var(--primary-background-color)
+#                          icon:
+#                            - color: var(--primary-text-color)
+                        tap_action:
+                          action: call-service
+                          service: homeassistant.toggle
+                          service_data: {"entity_id": "lock.gang"}
+                        type: 'custom:button-card'
+                      - cards:
+                          - content: |
+                              # Lås Ytterdør
+                            style:
+                              .: |
+                                ha-card {
+                                  height: 20px;                  
+                                  --paper-card-background-color: none !important;
+                                  box-shadow:  none !important;
+                                }
+                              ha-markdown:
+                                $: |
+                                  h1 {
+                                    font-size: 20px;
+                                    font-weight: bold;
+                                    font-family: Helvetica;
+                                    letter-spacing: '-0.01em';
+                                  }
+                            type: markdown
+                          - content: |
+                              # Skrur av alle lys nede
+                            style:
+                              .: |
+                                ha-card {
+                                  --paper-card-background-color: none !important;
+                                  box-shadow:  none !important;
+                                }
+                              ha-markdown:
+                                $: |
+                                  h1 {
+                                    font-size: 15px;
+                                    font-weight: thin;
+                                    font-family: Helvetica;
+                                    letter-spacing: '-0.01em';
+                                  }
+                            type: markdown
+                        type: vertical-stack
+                    type: horizontal-stack
+####################################################################
+#                    Home Button                                   #
+####################################################################
+                  - cards:
+                      - icon: 'mdi:home-variant'
+                        show_icon: true
+                        show_name: false
+                        style: |
+                          ha-card {
+                            margin: 10px;
+                            box-shadow: 
+                              {% if is_state('sun.sun', 'above_horizon') %}
+                                -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                              {% elif is_state('sun.sun', 'below_horizon') %}
+                                -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                              {% endif %}                 
+                          }
+                        styles:
+                          card:
+                            - width: 80px
+                            - height: 80px
+                            - border-radius: 15px
+                            - background-color: var(--primary-background-color)
+                          icon:
+                            - color: var(--primary-text-color)
+                        tap_action:
+                          action: navigate
+                          navigation_path: /ui-dashboard/home
+                          haptic: light
+                        type: 'custom:button-card'
+                      - cards:
+                          - content: |
+                              # Hjem
+                            style:
+                              .: |
+                                ha-card {
+                                  --paper-card-background-color: none !important;;
+                                  box-shadow: none !important;
+                                  height: 20px;
+                                }
+                              ha-markdown:
+                                $: |
+                                  h1 {
+                                    font-size: 20px;
+                                    font-weight: bold;
+                                    font-family: Helvetica;
+                                    letter-spacing: '-0.01em';
+                                  }
+                            type: markdown
+                          - content: |
+                              # Gå tilbake til hovedmenyen
+                            style:
+                              .: |
+                                ha-card {
+                                  --paper-card-background-color: none !important;;
+                                  box-shadow: none !important;
+                                }
+                              ha-markdown:
+                                $: |
+                                  h1 {
+                                    font-size: 15px;
+                                    font-weight: thin;
+                                    font-family: Helvetica;
+                                    letter-spacing: '-0.01em';
+                                  }
+                            type: markdown
+                        type: vertical-stack
+                    type: horizontal-stack
+                type: vertical-stack
+            type: vertical-stack

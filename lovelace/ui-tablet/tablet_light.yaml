@@ -1,0 +1,709 @@
+title: Lights
+icon: mdi:lightbulb-multiple
+path: lights
+
+cards:
+      - type: vertical-stack
+        cards:
+          - cards:
+              - content: >
+                  # Det er  {% if is_state('sensor.lights_on', '0') %}
+                  ikke noen  {% else %}  {{states('sensor.lights_on')}}  {%
+                  endif %} lys på
+                style:
+                  .: |
+                    ha-card {
+                      --paper-card-background-color: none !important;;
+                      box-shadow: none !important;
+                      height: 50px;
+                    }
+                  ha-markdown:
+                    $: |
+                      h1 {
+                        font-size: 20px;
+                        font-weight: bold;
+                        font-family: Helvetica;
+                        letter-spacing: '-0.01em';
+                      }
+                type: markdown
+            type: vertical-stack
+          - cards:
+#######################################################################
+#                 Button 1 Oslo Lampe                                 #
+#######################################################################
+              - entity: light.oslo_lampe
+                icon: 'mdi:floor-lamp-variant'
+                show_icon: true
+                show_name: false
+                state:
+                  - styles:
+                      icon:
+                        - color: 'var(--paper-item-icon-active-color)  '
+                    value: 'on'
+                style: |
+                  ha-card {
+                    margin: 5px;  
+                    margin-left: 6.5px;
+                    box-shadow: 
+                      {% if is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'on') %}
+                        inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'off') %}                      
+                        -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'on') %}                      
+                        inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3); 
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'off') %}   
+                        -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                      {% endif %}                      
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 60px
+                    - height: 60px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                  icon:
+                    - color: var(--primary-text-color)
+                tap_action:
+                  action: toggle
+                  haptic: light
+                hold_action:
+                  action: more-info
+                  haptic: medium
+                type: 'custom:button-card'
+####################################################################
+#                      Button 2 Stue sofa                          #
+####################################################################
+              - entity: light.lys_stue_2
+                icon: 'mdi:sofa'
+                show_icon: true
+                show_name: false
+                state:
+                  - styles:
+                      icon:
+                        - color: 'var(--paper-item-icon-active-color)  '
+                    value: 'on'
+                style: |
+                  ha-card {
+                    margin: 5px;  
+                    margin-left: 6.5px;
+                    box-shadow: 
+                      {% if is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'on') %}
+                        inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'off') %}                      
+                        -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'on') %}                      
+                        inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3); 
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'off') %}   
+                        -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                      {% endif %}                      
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 60px
+                    - height: 60px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                  icon:
+                    - color: var(--primary-text-color)
+                tap_action:
+                  action: toggle
+                  haptic: light
+                hold_action:
+                  action: more-info
+                  haptic: medium
+                type: 'custom:button-card'
+##################################################################
+#                    Button3                                     #
+##################################################################
+              - entity: light.lys_spisebord_2
+                icon: 'mdi:table-chair'
+                show_icon: true
+                show_name: false
+                state:
+                  - styles:
+                      icon:
+                        - color: 'var(--paper-item-icon-active-color)  '
+                    value: 'on'
+                style: |
+                  ha-card {
+                    margin: 5px;                
+                    box-shadow: 
+                      {% if is_state('sun.sun', 'above_horizon') and is_state('switch.dining_area', 'on') %}
+                        inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'above_horizon') and is_state('switch.dining_area', 'off') %}                      
+                        -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.dining_area', 'on') %}                      
+                        inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3); 
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.dining_area', 'off') %}   
+                        -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                      {% endif %}                           
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 60px
+                    - height: 60px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                  icon:
+                    - color: var(--primary-text-color)
+                tap_action:
+                  action: toggle
+                  haptic: light
+                hold_action:
+                  action: more-info
+                  haptic: medium
+                type: 'custom:button-card'
+#######################################################################
+#                Button 4                                             #
+#######################################################################
+              - entity: light.lys_kjokken
+                icon: 'mdi:light-switch'
+                show_icon: true
+                show_name: false
+                state:
+                  - styles:
+                      icon:
+                        - color: 'var(--paper-item-icon-active-color)  '
+                    value: 'on'
+                style: |
+                  ha-card {
+                    margin: 5px;  
+                    box-shadow: 
+                      {% if is_state('sun.sun', 'above_horizon') and is_state('light.family_room_light', 'on') %}
+                        inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'above_horizon') and is_state('light.family_room_light', 'off') %}                      
+                        -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_light', 'on') %}                      
+                        inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3); 
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_light', 'off') %}   
+                        -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                      {% endif %}     
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 60px
+                    - height: 60px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                  icon:
+                    - color: var(--primary-text-color)
+                tap_action:
+                  action: toggle
+                  haptic: light
+                hold_action:
+                  action: more-info
+                  haptic: medium
+                type: 'custom:button-card'
+###########################################################
+#                 button 5                                #
+###########################################################
+              - entity: light.lys_vindfang
+                icon: 'mdi:wall-sconce-flat'
+                show_icon: true
+                show_name: false
+                state:
+                  - styles:
+                      icon:
+                        - color: 'var(--paper-item-icon-active-color)  '
+                    value: 'on'
+                style: |
+                  ha-card {
+                    margin: 5px;            
+                    box-shadow: 
+                      {% if is_state('sun.sun', 'above_horizon') and is_state('switch.dining_table', 'on') %}
+                        inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'above_horizon') and is_state('switch.dining_table', 'off') %}                      
+                        -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.dining_table', 'on') %}                      
+                        inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3); 
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.dining_table', 'off') %}   
+                        -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                      {% endif %}     
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 60px
+                    - height: 60px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                  icon:
+                    - color: var(--primary-text-color)
+                tap_action:
+                  action: toggle
+                  haptic: light
+                hold_action:
+                  action: more-info
+                  haptic: medium
+                type: 'custom:button-card'
+            type: horizontal-stack
+
+          - cards:
+#######################################################################
+#                 Button 6                                            #
+#######################################################################
+              - entity: light.light_jakob
+                icon: 'mdi:ceiling-light'
+                show_icon: true
+                show_name: false
+                state:
+                  - styles:
+                      icon:
+                        - color: 'var(--paper-item-icon-active-color)  '
+                    value: 'on'
+                style: |
+                  ha-card {
+                    margin: 5px;  
+                    margin-left: 6.5px;
+                    box-shadow: 
+                      {% if is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'on') %}
+                        inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'off') %}                      
+                        -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'on') %}                      
+                        inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3); 
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'off') %}   
+                        -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                      {% endif %}                      
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 60px
+                    - height: 60px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                  icon:
+                    - color: var(--primary-text-color)
+                tap_action:
+                  action: toggle
+                  haptic: light
+                hold_action:
+                  action: more-info
+                  haptic: medium
+                type: 'custom:button-card'
+####################################################################
+#                      Button 7                                    #
+####################################################################
+              - entity: light.lys_gang_2_etg_2
+                icon: 'mdi:wall-sconce-flat'
+                show_icon: true
+                show_name: false
+                state:
+                  - styles:
+                      icon:
+                        - color: 'var(--paper-item-icon-active-color)  '
+                    value: 'on'
+                style: |
+                  ha-card {
+                    margin: 5px;  
+                    margin-left: 6.5px;
+                    box-shadow: 
+                      {% if is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'on') %}
+                        inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'off') %}                      
+                        -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'on') %}                      
+                        inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3); 
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'off') %}   
+                        -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                      {% endif %}                      
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 60px
+                    - height: 60px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                  icon:
+                    - color: var(--primary-text-color)
+                tap_action:
+                  action: toggle
+                  haptic: light
+                hold_action:
+                  action: more-info
+                  haptic: medium
+                type: 'custom:button-card'
+##################################################################
+#                    Button 8                                    #
+##################################################################
+              - entity: light.gang_soverom_2
+                icon: 'mdi:vanity-light'
+                show_icon: true
+                show_name: false
+                state:
+                  - styles:
+                      icon:
+                        - color: 'var(--paper-item-icon-active-color)  '
+                    value: 'on'
+                style: |
+                  ha-card {
+                    margin: 5px;                
+                    box-shadow: 
+                      {% if is_state('sun.sun', 'above_horizon') and is_state('switch.dining_area', 'on') %}
+                        inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'above_horizon') and is_state('switch.dining_area', 'off') %}                      
+                        -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.dining_area', 'on') %}                      
+                        inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3); 
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.dining_area', 'off') %}   
+                        -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                      {% endif %}                           
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 60px
+                    - height: 60px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                  icon:
+                    - color: var(--primary-text-color)
+                tap_action:
+                  action: toggle
+                  haptic: light
+                hold_action:
+                  action: more-info
+                  haptic: medium
+                type: 'custom:button-card'
+#######################################################################
+#                Button 9                                             #
+#######################################################################
+              - entity: light.hovedsoverom
+                icon: 'mdi:bed-empty'
+                show_icon: true
+                show_name: false
+                state:
+                  - styles:
+                      icon:
+                        - color: 'var(--paper-item-icon-active-color)  '
+                    value: 'on'
+                style: |
+                  ha-card {
+                    margin: 5px;  
+                    box-shadow: 
+                      {% if is_state('sun.sun', 'above_horizon') and is_state('light.family_room_light', 'on') %}
+                        inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'above_horizon') and is_state('light.family_room_light', 'off') %}                      
+                        -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_light', 'on') %}                      
+                        inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3); 
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_light', 'off') %}   
+                        -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                      {% endif %}     
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 60px
+                    - height: 60px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                  icon:
+                    - color: var(--primary-text-color)
+                tap_action:
+                  action: toggle
+                  haptic: light
+                hold_action:
+                  action: more-info
+                  haptic: medium
+                type: 'custom:button-card'
+###########################################################
+#                 button 10                               #
+###########################################################
+              - entity: light.soverom_sara
+                icon: 'mdi:human-child'
+                show_icon: true
+                show_name: false
+                state:
+                  - styles:
+                      icon:
+                        - color: 'var(--paper-item-icon-active-color)  '
+                    value: 'on'
+                style: |
+                  ha-card {
+                    margin: 5px;            
+                    box-shadow: 
+                      {% if is_state('sun.sun', 'above_horizon') and is_state('switch.dining_table', 'on') %}
+                        inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'above_horizon') and is_state('switch.dining_table', 'off') %}                      
+                        -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.dining_table', 'on') %}                      
+                        inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3); 
+                      {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.dining_table', 'off') %}   
+                        -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                      {% endif %}     
+                  }
+                  @media only screen and (max-width: 600px) {
+                      ha-card {
+                        margin: 3px; 
+                        margin-left: 4px;                   
+                      }
+                  }
+                  @media only screen and (min-width: 1200px) {
+                      ha-card {
+                        margin: 8px;  
+                        margin-left: 11px;               
+                      }
+                  }
+                styles:
+                  card:
+                    - width: 60px
+                    - height: 60px
+                    - border-radius: 15px
+                    - background-color: var(--primary-background-color)
+                  icon:
+                    - color: var(--primary-text-color)
+                tap_action:
+                  action: toggle
+                  haptic: light
+                hold_action:
+                  action: more-info
+                  haptic: medium
+                type: 'custom:button-card'
+            type: horizontal-stack
+############################################################################################
+#                       God Night button                                                   #
+############################################################################################
+          - cards:
+              - cards:
+                  - cards:
+                      - entity: group.downstairs_lights
+                        icon: 'mdi:sleep'
+                        show_icon: true
+                        show_name: false
+                        style: |
+                          ha-card {
+                            margin: 10px;
+                            box-shadow: 
+                              {% if is_state('sun.sun', 'above_horizon') %}
+                                -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                              {% elif is_state('sun.sun', 'below_horizon') %}
+                                -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                              {% endif %}                 
+                          }
+                        styles:
+                          card:
+                            - width: 80px
+                            - height: 80px
+                            - border-radius: 15px
+                            - background-color: var(--primary-background-color)
+                          icon:
+                            - color: var(--primary-text-color)
+                        tap_action:
+                          action: call-service
+                          service: homeassistant.turn_off
+                          service_data: {"entity_id": "group.downstairs_lights"}
+                        type: 'custom:button-card'
+                      - cards:
+                          - content: |
+                              # God Natt
+                            style:
+                              .: |
+                                ha-card {
+                                  height: 20px;                  
+                                  --paper-card-background-color: none !important;
+                                  box-shadow:  none !important;
+                                }
+                              ha-markdown:
+                                $: |
+                                  h1 {
+                                    font-size: 20px;
+                                    font-weight: bold;
+                                    font-family: Helvetica;
+                                    letter-spacing: '-0.01em';
+                                  }
+                            type: markdown
+                          - content: |
+                              # Skrur av alle lys nede
+                            style:
+                              .: |
+                                ha-card {
+                                  --paper-card-background-color: none !important;
+                                  box-shadow:  none !important;
+                                }
+                              ha-markdown:
+                                $: |
+                                  h1 {
+                                    font-size: 15px;
+                                    font-weight: thin;
+                                    font-family: Helvetica;
+                                    letter-spacing: '-0.01em';
+                                  }
+                            type: markdown
+                        type: vertical-stack
+                    type: horizontal-stack
+####################################################################
+#                    Home Button                                   #
+####################################################################
+                  - cards:
+                      - icon: 'mdi:home-variant'
+                        show_icon: true
+                        show_name: false
+                        style: |
+                          ha-card {
+                            margin: 10px;
+                            box-shadow: 
+                              {% if is_state('sun.sun', 'above_horizon') %}
+                                -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                              {% elif is_state('sun.sun', 'below_horizon') %}
+                                -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                              {% endif %}                 
+                          }
+                        styles:
+                          card:
+                            - width: 80px
+                            - height: 80px
+                            - border-radius: 15px
+                            - background-color: var(--primary-background-color)
+                          icon:
+                            - color: var(--primary-text-color)
+                        tap_action:
+                          action: navigate
+                          navigation_path: /ui-dashboard/home
+                          haptic: light
+                        type: 'custom:button-card'
+                      - cards:
+                          - content: |
+                              # Hjem
+                            style:
+                              .: |
+                                ha-card {
+                                  --paper-card-background-color: none !important;;
+                                  box-shadow: none !important;
+                                  height: 20px;
+                                }
+                              ha-markdown:
+                                $: |
+                                  h1 {
+                                    font-size: 20px;
+                                    font-weight: bold;
+                                    font-family: Helvetica;
+                                    letter-spacing: '-0.01em';
+                                  }
+                            type: markdown
+                          - content: |
+                              # Gå tilbake til hovedmenyen
+                            style:
+                              .: |
+                                ha-card {
+                                  --paper-card-background-color: none !important;;
+                                  box-shadow: none !important;
+                                }
+                              ha-markdown:
+                                $: |
+                                  h1 {
+                                    font-size: 15px;
+                                    font-weight: thin;
+                                    font-family: Helvetica;
+                                    letter-spacing: '-0.01em';
+                                  }
+                            type: markdown
+                        type: vertical-stack
+                    type: horizontal-stack
+                type: vertical-stack
+            type: vertical-stack

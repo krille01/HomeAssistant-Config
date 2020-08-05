@@ -1,0 +1,216 @@
+#############################################################################################################################################
+#                                                                                                                                           # 
+#                                                         VIEW 1 - DOWNSTAIRS                                                               #
+#                                                                                                                                           #
+#############################################################################################################################################  
+title: 1 etg
+background: center / cover no-repeat url("/local/lovelace/background_spurs_01.jpg") fixed
+icon: mdi:sofa
+path: downstairs
+theme: transparent
+cards:
+#################################################################
+#                                                               #
+#             Downstairs - Temperature Graph Card               #
+#                                                               #
+#################################################################
+    - type: vertical-stack
+      cards:
+        - type: custom:mini-graph-card
+          entities: 
+            - sensor.temp_senor_stue_2
+          height: 65
+          line_width: 2
+          font_size: 70
+          hours_to_show: 168
+          points_per_hour: 1
+          show:
+            #extrema: true
+            fill: true
+            #graph: bar
+          color_thresholds:
+            - value: 28
+              color: "#e74c3c"
+            - value: 15
+              color: "#1db954"
+            - value: 0
+              color: "#3498db"
+  
+        - type: horizontal-stack
+          cards:
+            - type: entity-button
+              entity: group.downstairs_lights
+              name: Av alle lys
+              icon: mdi:lightbulb
+              tap_action: 
+                action: call-service
+                service: homeassistant.turn_off
+                service_data: {"entity_id": "group.downstairs_lights"}
+      
+            - type: entity-button
+              entity: group.downstairs_lights
+              name: Alle lys på
+              icon: mdi:lightbulb-on
+              tap_action: 
+                action: call-service
+                service: homeassistant.turn_on
+                service_data: { "entity_id": "group.downstairs_lights" }
+      
+            - type: entity-button
+              entity: scene.livingroom_dim
+              name: Stue Dempet
+              icon: mdi:lightbulb-on-outline
+              tap_action: 
+                action: call-service
+                service: scene.turn_on
+                service_data: { "entity_id": "scene.livingroom_dim" }
+  
+            - type: entity-button
+              entity: scene.livingroom_normal
+              name: Stue Vanlig
+              icon: mdi:lightbulb-on
+              tap_action: 
+                action: call-service
+                service: scene.turn_on
+                service_data: { "entity_id": "scene.livingroom_normal" }
+  
+  #################################################################
+  #                                                               #
+  #                    Downstairs - Light Card                    #
+  #                                                               #
+  #################################################################
+  
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - type: divider
+            - type: 'custom:text-divider-row'
+              text: Lys
+            - type: divider
+            - type: custom:slider-entity-row
+              entity: light.lys_vindfang
+            - type: custom:slider-entity-row
+              entity: light.trapp_etg1
+            - light.lys_kjokken_benk
+            - type: custom:slider-entity-row
+              entity: light.lys_mikro
+            - type: custom:slider-entity-row
+              entity: light.lys_spisebord_2
+            - type: custom:slider-entity-row
+              entity: light.lys_stue_2
+            - type: custom:slider-entity-row
+              entity: light.oslo_lampe
+
+#################################################################
+#                                                               #
+#               Downstairs - Humidity Graph Card                #
+#                                                               #
+#################################################################
+
+    - type: vertical-stack
+      cards:
+        - type: custom:mini-graph-card
+          entities: 
+          - sensor.temp_senor_stue
+          height: 65
+          line_width: 2
+          font_size: 70
+          hours_to_show: 168
+          points_per_hour: 1
+          show:
+            #extrema: true
+            fill: true
+            #graph: bar
+          color_thresholds:
+            - value: 70
+              color: "#e74c3c"
+            - value: 40
+              color: "#1db954"
+            - value: 0
+              color: "#3498db"            
+
+        - type: horizontal-stack
+          cards:
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - type: divider
+              - type: 'custom:text-divider-row'
+                text: Ventilasjon
+              - type: divider
+              - input_number.fan_speed
+              - type: divider
+              - input_number.temperature_set
+
+#################################################################
+#                                                               #
+#            Downstairs - Lounge Media Player Card              #
+#                                                               #
+#################################################################
+        - type: entities
+          style: | 
+            ha-card {
+              color: white;
+              background-image: url("/local/lovelace/cardbackK.png");
+              background-repeat: no-repeat;
+              background-color: rgba(50,50,50,0.3);
+              background-size: 100%
+            }
+            .card-content {
+              padding: 0
+            }
+          entities:
+          - type: custom:mini-media-player
+            entity: media_player.kjokken
+            name: Google Home Kjøkken
+            artwork: cover
+            power_color: true
+            show_source: true
+            show_progress: true
+            group: true
+
+          - type: custom:mini-media-player
+            entity: media_player.stue
+            name: Chromecast Stue
+            artwork: cover
+            power_color: true
+            show_source: true
+            show_progress: true
+            group: true
+
+          - type: custom:group-card
+            card:
+              type: entities
+              title: Radio
+              show_header_toggle: false
+            group: group.radio
+
+        - type: horizontal-stack
+          cards:
+
+#################################################################
+#                                                               #
+#                  Downstairs - Lounge TV Card                  #
+#                                                               #
+#################################################################
+
+              - type: entity-button
+                entity: switch.tvpower
+                name: TV Stue
+                icon: mdi:television
+                tap_action: 
+                    action: toggle
+
+              - type: entity-button
+                entity: switch.decoderpower
+                name: Dekoder
+                icon: mdi:television
+                tap_action: 
+                    action: toggle
+
+              - type: entity-button
+                entity: switch.lydplankepower
+                name: Lydplanke
+                icon: mdi:television
+                tap_action: 
+                    action: toggle

@@ -1,0 +1,77 @@
+homeassistant:
+  customize:
+    sensor.jakob:
+      entity_picture: /local/picture/jakob.png
+    sensor.samuel:
+      entity_picture: /local/picture/samuel.png
+    sensor.battery_kristian:
+      icon: mdi:battery
+    person.kristian:
+      entity_picture: /local/picture/kristian.png
+    person.lill_venke:
+      entity_picture: /local/picture/lill-venke.png
+    person.samuel:
+      entity_picture: /local/picture/samuel.png
+    person.jakob:
+      entity_picture: /local/picture/jakob.png
+
+
+group:
+  awesome_people:
+    name: Awesome People
+    entities:
+      - device_tracker.telefon_kristian
+      - device_tracker.iphone_jakob_wifi
+      - device_tracker.hostname2
+      - device_tracker.iphone_lill_wifi
+
+sensor:
+
+####################################################
+#                                                  #
+#                Sensors - Template                #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      samuel:
+        friendly_name: Samuel
+        value_template: >-
+          {% if is_state('device_tracker.hostname2', 'home') %}
+            Hjemme
+          {% else %}
+            Borte
+          {% endif %}
+        entity_picture_template: >-
+          {% if is_state('device_tracker.hostname2', 'home') %}
+            /local/picture/samuel.png
+          {% endif %}
+
+  - platform: template
+    sensors:
+      jakob:
+        friendly_name: jakob
+        value_template: >-
+          {% if is_state('device_tracker.iphone_jakob_wifi', 'home') %}
+            Hjemme
+          {% else %}
+            Borte
+          {% endif %}
+        entity_picture_template: >-
+          {% if is_state('device_tracker.iphone_jakob_wifi', 'home') %}
+            /local/picture/jakob.png
+          {% endif %}
+
+  - platform: template
+    sensors:
+      person_home:
+        entity_id:
+          - person.kristian
+          - person.lill_venke
+          - sensor.samuel
+          - sensor.jakob
+        friendly_name: Personer Hjemme
+        value_template: "{{ states | selectattr('entity_id','in', ['person.kristian','sensor.jakob','sensor.samuel', 'person.lill_venke'])|selectattr('state','eq','Hjemme') | list | count }}"
+
+

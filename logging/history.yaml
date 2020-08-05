@@ -1,0 +1,6 @@
+  include:
+    domains:
+    - sensor
+    - light
+    - device_tracker
+    

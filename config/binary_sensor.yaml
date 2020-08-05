@@ -1,0 +1,26 @@
+
+
+- platform: template
+  sensors:
+    renovation_general_waste_tomorrow:
+      friendly_name: "Varsel Renovasjon Restavfall"
+      value_template: "{{((as_timestamp(states('sensor.restavfall')) - (3600 * 13)) | timestamp_local) < (as_timestamp(now()) | timestamp_local)}}"
+      icon_template: >-
+        {% if is_state('binary_sensor.renovation_general_waste_tomorrow', 'on') %}
+          mdi:delete
+        {% elif is_state('binary_sensor.renovation_general_waste_tomorrow', 'off') %}
+          mdi:delete
+        {% else %}
+          mdi:alert
+        {% endif %}
+    renovation_papir_waste_tomorrow:
+      friendly_name: "Varsel Renovasjon Papir"
+      value_template: "{{((as_timestamp(states('sensor.papir')) - (3600 * 13)) | timestamp_local) < (as_timestamp(now()) | timestamp_local)}}"
+      icon_template: >-
+        {% if is_state('binary_sensor.renovation_papir_waste_tomorrow', 'on') %}
+          mdi:recycle
+        {% elif is_state('binary_sensor.renovation_papir_waste_tomorrow', 'off') %}
+          mdi:recycle
+        {% else %}
+          mdi:alert
+        {% endif %}

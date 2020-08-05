@@ -1,0 +1,171 @@
+#############################################################################################################################################
+#                                                                                                                                           # 
+#                                                         VIEW 2 - UPPSTAIRS                                                                #
+#                                                                                                                                           #
+#############################################################################################################################################  
+title: 2 etg
+background: center / cover no-repeat url("/local/lovelace/background_spurs_01.jpg") fixed
+icon: mdi:home-floor-2
+path: upstairs
+theme: transparent
+cards:
+#################################################################
+#                                                               #
+#             Uppstairs - Temperature Graph Card               #
+#                                                               #
+#################################################################
+    - type: vertical-stack
+      cards:
+        - type: custom:mini-graph-card
+          entities: 
+            - sensor.temp_sensoe_2_etg_2
+          height: 65
+          line_width: 2
+          font_size: 70
+          hours_to_show: 168
+          points_per_hour: 1
+          show:
+            #extrema: true
+            fill: true
+            #graph: bar
+          color_thresholds:
+            - value: 28
+              color: "#e74c3c"
+            - value: 15
+              color: "#1db954"
+            - value: 0
+              color: "#3498db"
+
+        - type: horizontal-stack
+          cards:
+            - type: entity-button
+              entity: group.uppstairs_lights
+              name: Av alle lys
+              icon: mdi:lightbulb
+              tap_action: 
+                action: call-service
+                service: homeassistant.turn_off
+                service_data: {"entity_id": "group.uppstairs_lights"}
+      
+            - type: entity-button
+              entity: group.uppstairs_lights
+              name: Alle lys på
+              icon: mdi:lightbulb-on
+              tap_action: 
+                action: call-service
+                service: homeassistant.turn_on
+                service_data: { "entity_id": "group.uppstairs_lights" }
+      
+            - type: entity-button
+              entity: scene.oppe_normal
+              name: Oppe Vanlig
+              icon: mdi:lightbulb-on-outline
+              tap_action: 
+                action: call-service
+                service: scene.turn_on
+                service_data: { "entity_id": "scene.oppe_normal" }
+  
+            - type: entity-button
+              entity: scene.oppe_night
+              name: Natt
+              icon: mdi:lightbulb
+              tap_action: 
+                action: call-service
+                service: scene.turn_on
+                service_data: { "entity_id": "scene.oppe_night" }
+
+#################################################################
+#                                                               #
+#               Master Bedroom - Light Group Card               #
+#                                                               #
+#################################################################
+
+        - type: picture-entity
+          entity: group.uppstairs_lights
+          name: Lys
+          tap_action: 
+            action: toggle
+          image: /local/lovelace/bedrooms/bed-light.jpg
+
+#################################################################
+#                                                               #
+#                Master Bedroom - Main Light Card               #
+#                                                               #
+#################################################################
+
+        - type: horizontal-stack
+          cards:
+            - type: picture-entity
+              entity: light.gang_soverom_2
+              name: Lampe Soverom
+              tap_action: 
+                action: toggle
+              image: /local/lovelace/bedrooms/main-bed-light_2.jpg
+
+#################################################################
+#                                                               #
+#              Master Bedroom - Bedside lamp Card              #
+#                                                               #
+#################################################################
+
+            - type: picture-entity
+              entity: light.lys_gang_2_etg_2
+              name: Lampe 2 etg
+              tap_action: 
+                action: toggle
+              image: /local/lovelace/bedrooms/walk-in-light_2.jpg
+
+#################################################################
+#                                                               #
+#               Uppstairs - Humidity Graph Card                #
+#                                                               #
+#################################################################
+
+    - type: vertical-stack
+      cards:
+        - type: custom:mini-graph-card
+          entities: 
+          - sensor.temp_sensoe_2_etg
+          height: 65
+          line_width: 2
+          font_size: 70
+          hours_to_show: 168
+          points_per_hour: 1
+          show:
+            #extrema: true
+            fill: true
+            #graph: bar
+          color_thresholds:
+            - value: 70
+              color: "#e74c3c"
+            - value: 40
+              color: "#1db954"
+            - value: 0
+              color: "#3498db"
+
+#################################################################
+#                                                               #
+#         Master Bedroom - Brightness light 2 etg               #
+#                                                               #
+#################################################################
+        - type: custom:gap-card
+          height: 68
+          size:
+
+        - type: entities
+          style: | 
+            ha-card {
+              color: white;
+              background-image: url("/local/lovelace/cardbackK.png");
+              background-repeat: no-repeat;
+              background-color: rgba(50,50,50,0.3);
+              background-size: 100%
+            }
+            .card-content {
+              padding: 0
+            }
+          entities:
+            - type: custom:slider-entity-row
+              entity: light.gang_hovedsoverom
+            - type: custom:slider-entity-row
+              entity: light.gang_soverom_2

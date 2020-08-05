@@ -1,0 +1,296 @@
+#############################################################################################################################################
+#                                                                                                                                           # 
+#                                                               VIEW 0 - HOME                                                               #
+#                                                                                                                                           #
+#############################################################################################################################################  
+title: Home
+background: center / cover no-repeat url('/local/lovelace/background_spurs_01.jpg') fixed
+icon: mdi:castle
+path: home
+theme: transparent
+cards:
+
+ 
+#################################################################
+#                                                               #
+#                       Home - Clock Card                       #
+#                                                               #
+################################################################# 
+
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        content: >
+          # {{ states('sensor.time') }}
+            
+          ### {{ states ('sensor.date') }}
+
+
+#################################################################
+#                                                               #
+#                     Home - Glance Card                        #
+#                                                               #
+################################################################# 
+            
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - binary_sensor.lock
+          - binary_sensor.doors
+          - type: divider
+          - sensor.temp_level
+          - sensor.fan_speed
+          - type: divider
+          - binary_sensor.renovation_general_waste_tomorrow
+          - binary_sensor.renovation_papir_waste_tomorrow
+          - type: divider
+          - sensor.roomba_status
+          - sensor.washing_machine_status
+          - sensor.dish_machine_status
+          
+
+#################################################################
+#                                                               #
+#                     Home - Next Bus Card                      #
+#                                                               #
+#################################################################
+
+
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - type: 'custom:text-divider-row'
+            text: Neste Buss til Ski
+          - entity: sensor.transport_grenseveien_platform_9604
+            name: ' '
+          - entity: sensor.next_buss_grenseveien
+            name: ' '
+          - type: 'custom:text-divider-row'
+            text: Neste Buss til Barnehgane
+          - entity: sensor.transport_grenseveien_platform_9603
+            name: ' '
+          - entity: sensor.next_buss_grenseveien_bhg  
+#################################################################
+#                                                               #
+#                     Home - Presence Card                      #
+#                                                               #
+################################################################# 
+
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - person.kristian
+              - type: divider
+              - sensor.battery_level
+  
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - person.lill_venke
+              - type: divider
+              - sensor.lill_venke_sin_iphone_battery_level
+
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - sensor.samuel
+              
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - sensor.jakob
+
+#################################################################
+#                                                               #
+#                     Home - Car                                #
+#                                                               #
+#################################################################
+#  - type: vertical-stack
+#    cards:
+#    - type: picture-elements
+#      image: /local/passat/passat.png
+#      elements:
+#        - type: image
+#          entity: switch.wvwzzz3czje020489_climatisation
+#          image: /local/passat/blank.png
+#          style:
+#            top: 39.5%
+#            left: 55%
+#            width: 43%
+#          state_image:
+#            "on": /local/passat/passat_heat.png
+#  
+#        - type: image
+#          entity: binary_sensor.wvwzzz3czje020489_external_power
+#          image: /local/passat/blank.png
+#          style:
+#            top: 62.8%
+#            left: 21.2%
+#            width: 43%
+#          state_image:
+#            "on": /local/passat/passatcharging.png
+#  
+#        - type: image
+#          entity: binary_sensor.wvwzzz3czje020489_parking_light
+#          image: /local/passat/blank.png
+#          style:
+#            top: 66.8%
+#            left: 37.2%
+#            width: 37%
+#          state_image:
+#            "on": /local/passat/passat_light.png
+#        
+#        - type: image
+#          entity: lock.wvwzzz3czje020489_door_locked
+#          image:  /local/passat/blank.png
+#          style:
+#            top: 42.3%
+#            left: 57%
+#            width: 2%
+#          state_image:
+#            locked: /local/passat/blink.gif
+#  
+#        - type: state-icon
+#          entity: lock.wvwzzz3czje020489_door_locked
+#          style:
+#            top: 87%
+#            left: 47%
+#  
+#        - type: state-icon
+#          entity: switch.wvwzzz3czje020489_climatisation
+#          hold_action: 
+#            action: toggle
+#          style:
+#            top: 87%
+#            left: 58%
+#  
+#        - type: state-icon
+#          entity: switch.wvwzzz3czje020489_window_heater
+#          hold_action:
+#            action: toggle
+#          style:
+#            top: 87%
+#            left: 69%
+#  
+#        - type: state-icon
+#          entity: switch.wvwzzz3czje020489_charging
+#          style:
+#            top: 87%
+#            left: 80%
+#  
+#        - type: state-label
+#          entity: sensor.wvwzzz3czje020489_battery_level
+#          style:
+#            top: 96%
+#            left: 81%
+#  
+#        - type: state-icon
+#          entity: sensor.wvwzzz3czje020489_fuel_level
+#          style:
+#            top: 87%
+#            left: 91%
+#  
+#        - type: state-label
+#          entity: sensor.wvwzzz3czje020489_fuel_level
+#          style:
+#            top: 96%
+#            left: 92%
+#  
+#        - type: state-icon
+#          entity: sensor.wvwzzz3czje020489_odometer
+#          style:
+#            top: 87%
+#            left: 36%
+#  
+#        - type: state-label
+#          entity: sensor.wvwzzz3czje020489_odometer
+#          style:
+#            top: 96%
+#            left: 37%
+
+
+
+#################################################################
+#                                                               #
+#                      Home - Weather Card                      #
+#                                                               #
+#################################################################
+
+  - type: vertical-stack
+    cards:
+      - type: weather-forecast
+        entity: weather.my_home
+
+##################################################################
+#                                                                #
+#                       Temprature                               #
+#                                                                #
+##################################################################
+
+      - type: custom:mini-graph-card
+        entities: 
+          - sensor.outdoor_temp
+        name: Ute
+        height: 46
+        line_width: 2
+        font_size: 65
+        hours_to_show: 168
+        points_per_hour: 1
+        show:
+          icon: false
+          extrema: true
+        color_thresholds:
+          - value: 28
+            color: "#e74c3c"
+          - value: 15
+            color: "#1db954"
+          - value: 0
+            color: "#3498db"
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities: 
+              - sensor.temp_senor_stue_2
+            name: Nede
+            height: 74
+            line_width: 2
+            font_size: 65
+            hours_to_show: 168
+            points_per_hour: 1
+            show:
+              icon: false
+              extrema: true
+            color_thresholds:
+              - value: 28
+                color: "#e74c3c"
+              - value: 15
+                color: "#1db954"
+              - value: 0
+                color: "#3498db"
+            
+          - type: custom:mini-graph-card
+            entities: 
+              - sensor.temp_sensoe_2_etg_2
+            name: Oppe
+            height: 74
+            line_width: 2
+            font_size: 65
+            hours_to_show: 168
+            points_per_hour: 1
+            show:
+              icon: false
+              extrema: true
+            color_thresholds:
+              - value: 28
+                color: "#e74c3c"
+              - value: 15
+                color: "#1db954"
+              - value: 0
+                color: "#3498db" 

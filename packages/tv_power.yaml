@@ -1,0 +1,133 @@
+#################################################################
+#                                                               #
+#                   Packages/TV Power Status                    #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                            Switch                             #
+#                                                               #
+#################################################################
+
+switch:
+  - platform: template
+    switches:
+      tvpower:
+        friendly_name: Lounge TV
+        value_template: >-
+          {% if is_state('timer.tv_delay', 'idle') %}
+          {{ states("binary_sensor.tv_ping") }}
+          {% else %}
+          {{ states("input_boolean.tv_power_status") }}
+          {% endif %}
+        turn_on:
+          - service: switch.turn_on
+            data:
+              entity_id: switch.tv_power
+          - service: input_boolean.turn_on
+            data:
+              entity_id: input_boolean.tv_power_status
+          - service: timer.start
+            entity_id: timer.tv_delay
+        turn_off:
+          - service: switch.turn_off
+            data:
+              entity_id: switch.tv_power
+          - service: input_boolean.turn_off
+            data:
+              entity_id: input_boolean.tv_power_status
+          - service: timer.start
+            entity_id: timer.tv_delay
+        icon_template: mdi:television-classic
+
+      decoderpower:
+        friendly_name: Dekoder Stue
+        value_template: >-
+          {{ states("binary_sensor.dekoder_mqtt_status") }}
+        turn_on:
+          - service: switch.turn_on
+            data:
+              entity_id: switch.dekoder_power
+        turn_off:
+          - service: switch.turn_off
+            data:
+              entity_id: switch.decoder_power
+
+      lydplankepower:
+        friendly_name: Lydplanke Stue
+        value_template: >-
+          {{ states("binary_sensor.lydplanke_mqtt_status") }}
+        turn_on:
+          - service: switch.turn_on
+            data:
+              entity_id: switch.lydplanke_power
+        turn_off:
+          - service: switch.turn_off
+            data:
+              entity_id: switch.lydplanke_power
+
+      
+  - platform: mqtt
+    command_topic: "broadlink/rm3"
+    name: "Tv power"
+    payload_on: "67"
+    payload_off: "67"
+
+  - platform: mqtt
+    command_topic: "livingroom/tv/cec/3/cmd"
+    name: "Dekoder Power"
+    payload_on: "on"
+    payload_off: "off"
+
+  - platform: mqtt
+    command_topic: "livingroom/tv/cec/5/cmd"
+    name: "Lydplanke Power"
+    payload_on: "on"
+    payload_off: "off"
+
+#################################################################
+#                                                               #
+#                             Timer                             #
+#                                                               #
+#################################################################
+
+timer: # It takes 8 seconds for my tv to connect / disconnect from the network
+  tv_delay:
+    duration: '00:00:09'
+
+#################################################################
+#                                                               #
+#                        Input Boolean                          #
+#                                                               #
+#################################################################
+
+input_boolean: # This stores the temporary TV power state while we are waiting for the TV ping to update
+  tv_power_status:
+    name: TV Power Status
+  decoder_power_status:
+    name: Dekoder Status
+  sound_bar_power_status:
+    name: Lydplanke Status
+#################################################################
+#                                                               #
+#                         Binary Sensor                         #
+#                                                               #
+#################################################################
+
+binary_sensor:
+  - platform: ping
+    host: 192.168.86.50
+    name: TV Ping
+    scan_interval: 2
+    count: 2
+  - platform: mqtt
+    state_topic: livingroom/tv/cec/3
+    payload_on: "on"
+    payload_off: "off"
+    name: Dekoder mqtt Status
+  - platform: mqtt
+    state_topic: livingroom/tv/cec/5
+    payload_on: "on"
+    payload_off: "off"
+    name: Lydplanke mqtt Status

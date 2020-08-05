@@ -1,0 +1,78 @@
+sensor:
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_free
+      - type: memory_use_percent
+      - type: processor_use
+      - type: last_boot
+  - platform: version
+    name: version_available
+    source: hassio
+  - platform: version
+    name: running_version
+    source: local
+
+####################################################
+#                                                  #
+#            Sensor - Database File Size           #
+#                                                  #
+####################################################
+
+  - platform: sql
+    db_url: !secret db_url
+    queries:
+      - name: HASS DB size
+        query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+        column: 'value'
+        unit_of_measurement: MB
+
+####################################################
+#                                                  #
+#              Sensor - Command Line               #
+#                                                  #
+####################################################
+
+
+  - platform: ssh
+    host: !secret proxmox_host
+    name: 'NUC CPU Temp'
+    username: !secret proxmox_user
+    password: !secret proxmox_pass
+    command: "sensors | grep 'Package id 0:' | cut -c17-20"
+    value_template: >-
+      {%- set line = value.split("\r\n") -%}
+      {{ line[1] }}
+    unit_of_measurement: '°C'
+
+####################################################
+#                                                  #
+#                 Sensor - DNS IP                  #
+#                                                  #
+####################################################
+
+  - platform: dnsip
+    hostname: !secret dns_hostname
+    name: TPG NBN
+    resolver: 8.8.8.8
+    
+####################################################
+#                                                  #
+#                Sensor - File Size                #
+#                                                  #
+####################################################
+
+  - platform: filesize
+    file_paths:
+      - /config/home-assistant.log
+
+####################################################
+#                                                  #
+#                 Sensor - Uptime                  #
+#                                                  #
+####################################################
+
+  - platform: uptime
+    name: Time Online
+    unit_of_measurement: hours

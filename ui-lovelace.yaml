@@ -1,0 +1,28 @@
+
+# resources: !include lovelace/resources.yaml
+
+
+custom_header:
+  compact_mode: true
+  hide_unused: true
+#  hide_config: true
+
+button_card_templates:
+  !include lovelace/button_card_templates/button_card_templates.yaml
+
+decluttering_templates:
+  !include lovelace/decluttering_templates/decluttering_templates.yaml
+
+title: My Awsome Home
+background: var(--background)
+views:
+  - !include lovelace/home.yaml
+  - !include lovelace/Downstairs.yaml
+  - !include lovelace/uppstairs.yaml
+  - !include lovelace/master_bedroom.yaml
+  - !include lovelace/sara.yaml
+  - !include lovelace/system_status.yaml
+  - !include lovelace/hvitevarer.yaml
+
+  
+      

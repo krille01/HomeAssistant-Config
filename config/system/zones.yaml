@@ -1,0 +1,17 @@
+- name: Hjemme
+  latitude: !secret H_latitude_home
+  longitude: !secret H_longitude_home
+  radius: 200
+  icon: mdi:home
+
+- name: Phonect
+  latitude:  59.913763
+  longitude: 10.757996
+  radius: 400
+  icon: mdi:briefcase
+
+- name: Barnehagen
+  latitude: 59.719428
+  longitude: 10.793378
+  radius: 400
+  icon: mdi:school

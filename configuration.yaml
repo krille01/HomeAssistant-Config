@@ -1,0 +1,131 @@
+homeassistant:
+  customize: !include customize.yaml
+  packages: !include_dir_named packages
+  whitelist_external_dirs:
+    - /config
+
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+#http:
+#  base_url: !secret ha_url
+#  ssl_certificate: !secret ssl_cert
+#  ssl_key: !secret ssl_key
+#ios:
+discovery:
+config:
+hassio:
+system_health:
+ssdp:
+zeroconf:
+sun:
+
+###############################################
+###                Assistants               ###
+###############################################
+google:
+  client_id: !secret google_id
+  client_secret: !secret google_secret
+cloud:
+
+
+###############################################
+###                  MOBILE                 ###
+###############################################
+
+
+
+###############################################
+###                   GUI                   ###
+###############################################
+lovelace: !include lovelace.yaml
+
+
+frontend:
+  themes: !include_dir_named themes
+
+map:
+
+panel_iframe: !include config/panel_iframe.yaml
+
+browser_mod:
+  devices:
+    63b6e135-56fab118:
+      name: kf-laptop 
+    609601db-9c720c82:
+      name: ha_app_kristian
+    c35276d5-74b4ae4b:
+      name: kf-tlf-chrome
+    26088b3c-770be42c:
+      name: dash_en
+############################################      
+####                LOGGING             ####
+############################################
+recorder: !include logging/recorder.yaml
+history: !include logging/history.yaml
+logbook: !include logging/logbook.yaml
+logger: !include logging/logger.yaml
+influxdb: !include logging/influxdb.yaml
+#############################################
+###               SERVICES                ###
+#############################################
+python_script:
+
+mqtt:
+  broker: 192.168.86.45
+  port: "1883"
+  client_id: home-assistant-1
+  discovery: true
+  discovery_prefix: homeassistant
+
+spotify:
+  client_id: !secret spotify_id_kristian
+  client_secret: !secret spotify_token_kristian
+    
+  
+spotcast:
+  sp_dc: !secret sp_dc
+  sp_key: !secret sp_key
+  accounts:
+    lill:
+      sp_dc: !secret sp_dc_lill
+      sp_key: !secret sp_key_lill
+
+tts:
+  - platform: google_translate
+    base_url: http://192.168.86.72:8123
+
+
+# notify: !include config/notify.yaml
+
+##############################################
+###         Tracing pepole                 ###
+##############################################
+
+device_tracker:
+  - platform: nmap_tracker
+    hosts:
+    - 192.168.86.46
+    - 192.168.86.27
+    - 192.168.86.24
+    - 192.168.86.36
+    consider_home: 300
+
+  - platform: iphonedetect
+    consider_home: 60
+    scan_interval: 12
+    new_device_defaults:
+      track_new_devices: true
+    hosts:
+      hostname1: 192.168.86.27
+      hostname2: 192.168.86.29
+zone: !include config/system/zones.yaml
+
+
+automation: !include automations.yaml
+script: !include config/scripts.yaml
+cover: !include config/cover.yaml
+camera: !include config/camera.yaml
+input_select: !include config/input_select.yaml
+binary_sensor: !include config/binary_sensor.yaml
+rest_command: !include config/rest.yaml
+

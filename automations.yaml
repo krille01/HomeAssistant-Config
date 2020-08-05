@@ -1,0 +1,48 @@
+- id: '1587665334902'
+  alias: Turn off lights
+  description: ''
+  trigger:
+  - device_id: bbeb2434f43e4e188964ad78af037a2b
+    domain: deconz
+    platform: device
+    subtype: side_2
+    type: remote_rotate_from_side_1
+  condition: []
+  action:
+  - device_id: 21c55afe0dec42f28d08be0c9d3440e5
+    domain: light
+    entity_id: light.hovedsoverom
+    type: turn_off
+- id: '1589827092650'
+  alias: Lydplanke_on
+  description: ''
+  trigger:
+  - entity_id: input_boolean.tv_power_status
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data: {}
+    entity_id: switch.lydplankepower
+    service: switch.turn_on
+- id: '1591167665353'
+  alias: Update Teams Presence
+  description: Updateing Teams Presence from Graph API
+  trigger:
+  - platform: time_pattern
+    seconds: '30'
+  condition: []
+  action:
+  - event: teams.get
+    event_data: {}
+- id: '1595849244542'
+  alias: o365_token
+  description: Update the office 365 token
+  trigger:
+  - minutes: '50'
+    platform: time_pattern
+  condition: []
+  action:
+  - event: o365_token.get
+    event_data: {}
