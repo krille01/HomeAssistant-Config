@@ -75,7 +75,7 @@ I hva some more sensors build on ESP8266 that will come in here later.
 
 
 ## Credits
-- People ([ccostan](https://github.com/CCOSTAN/Home-AssistantConfig), [Allen Derusha](https://github.com/aderusha/HASwitchPlate), [Thomas Lovén](https://github.com/thomasloven), [Drzzs](https://drzzs.com/), [Isabella Gross Alström](https://github.com/isabellaalstrom/home-assistant-config) among many otthers)) for shearing your work and contrubutions to Home Assistant.
+- People ([ccostan](https://github.com/CCOSTAN/Home-AssistantConfig), [Allen Derusha](https://github.com/aderusha/HASwitchPlate), [Thomas Lovén](https://github.com/thomasloven), [Drzzs](https://drzzs.com/), [Isabella Gross Alström](https://github.com/isabellaalstrom/home-assistant-config) among many otthers) for shearing your work and contrubutions to Home Assistant.
 
 
 
