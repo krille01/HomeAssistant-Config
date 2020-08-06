@@ -27,4 +27,4 @@ custom_components/
 lovelace/old/*
 lovelace/dev/*
 packages/plate02/*
-
+!www/picture/lovelace/*
