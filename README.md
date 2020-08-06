@@ -17,11 +17,22 @@ Here is the configuration files for my [Home Assistant](https://home-assistant.i
 | Google Wif | 4 | Cabel/Wifi | [Google Wifi](https://www.home-assistant.io/integrations/google_wifi/)| To get wifi all over the hosue|
 | Tp Link Switch | 2 | Cabel | | Google Wifi has only one Lan port |
 
-## Voice Assistant
+## <a name="Voice Assistant">Voice_Assistant</a>
 
 | Device  | Quantity | Connection | Home Assistant | Notes |
 | ------------- | :---: | ------------- | ------------- | ------------- |
 | Google Home | 2 | Wifi| [Google Home](https://www.home-assistant.io/integrations/google_assistant/)| Is used for playing music and play aunouncment from Home Assistant|
 | Google Home mini | 4 | Wifi | [Google Home](https://www.home-assistant.io/integrations/google_assistant/) | Manly used to play music in the bedrooms |
 
-I have also baught one Amazone Echo DOT for testing. I wil come back with more when this also is implemented in Home Assistant.
+I have also bought one Amazone Echo DOT for testing. I wil come back with more when this also is implemented in Home Assistant.
+
+## <a name="Hubs/Controllers">Hubs</a>
+
+| Device  | Quantity | Connection | Home Assistant | Notes |
+| ------------- | :---: | ------------- | ------------- | ------------- |
+| [IKEA TRÅDFRI](https://www.ikea.com/us/en/p/tradfri-gateway-white-00337813/)| 1 | Ethernet | [IKEA TRÅDFRI](https://www.home-assistant.io/integrations/tradfri/) | This was the first hub i baught for my home automation, Curently not used any more|
+| [TELLSTICK ZNET LITE V2(https://telldus.com/produkt/z-wave-gateway-tellstick-znet-lite-ver-2/)| 1 | Ethernet | [MQTT](https://www.home-assistant.io/integrations/mqtt/)| I do not use the official integration any more, as this did not work fast enough. Has instead added an app as with mqtt|
+| [VERISURE SMART HOME HUB](https://mypages.verisure.com/no/webshop.html#product/1178)| 1 | Ethernet | [Verisure](https://mypages.verisure.com/no/webshop.html#product/1178) | To comunicate with my Yale Doorman |
+| [ConBeeII USB Stick](https://phoscon.de/en/conbee2) | 1 | USB | [add-on for deCONZ](https://www.home-assistant.io/integrations/deconz/)| Is used for connect all my Zigbee diveces to Home Assistant|
+
+
