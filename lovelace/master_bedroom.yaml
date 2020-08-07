@@ -123,27 +123,15 @@ cards:
 #                                                               #
 #################################################################
 
-        - type: entities
-          style: | 
-            ha-card {
-              color: white;
-              background-image: url("/local/lovelace/cardbackK.png");
-              background-repeat: no-repeat;
-              background-color: rgba(50,50,50,0.3);
-              background-size: 100%
-            }
-            .card-content {
-              padding: 0
-            }
-          entities:
-          - type: custom:mini-media-player
-            entity: media_player.home_hovedsoverom
-            name: Google Home Soverom
-            artwork: cover
-            power_color: true
-            show_source: true
-            show_progress: true
-            group: true
+
+        - type: custom:mini-media-player
+          entity: media_player.home_hovedsoverom
+          name: Google Home Soverom
+          artwork: cover
+          power_color: true
+          show_source: true
+          show_progress: true
+
 
 #################################################################
 #                                                               #

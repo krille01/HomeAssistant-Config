@@ -147,43 +147,23 @@ cards:
 #            Downstairs - Lounge Media Player Card              #
 #                                                               #
 #################################################################
-        - type: entities
-          style: | 
-            ha-card {
-              color: white;
-              background-image: url("/local/lovelace/cardbackK.png");
-              background-repeat: no-repeat;
-              background-color: rgba(50,50,50,0.3);
-              background-size: 100%
-            }
-            .card-content {
-              padding: 0
-            }
-          entities:
-          - type: custom:mini-media-player
-            entity: media_player.kjokken
-            name: Google Home Kjøkken
-            artwork: cover
-            power_color: true
-            show_source: true
-            show_progress: true
-            group: true
 
-          - type: custom:mini-media-player
-            entity: media_player.stue
-            name: Chromecast Stue
-            artwork: cover
-            power_color: true
-            show_source: true
-            show_progress: true
-            group: true
-
-          - type: custom:group-card
-            card:
-              type: entities
-              title: Radio
-              show_header_toggle: false
-            group: group.radio
+        - type: custom:mini-media-player
+          entity: media_player.kjokken
+          name: Google Home Kjøkken
+          artwork: cover
+          power_color: true
+          show_source: true
+          show_progress: true
+          
+        - type: custom:mini-media-player
+          entity: media_player.stue
+          name: Chromecast Stue
+          artwork: cover
+          power_color: true
+          show_source: true
+          show_progress: true
+          
 
         - type: horizontal-stack
           cards:
@@ -194,23 +174,21 @@ cards:
 #                                                               #
 #################################################################
 
-              - type: entity-button
-                entity: switch.tvpower
-                name: TV Stue
-                icon: mdi:television
-                tap_action: 
-                    action: toggle
-
-              - type: entity-button
-                entity: switch.decoderpower
-                name: Dekoder
-                icon: mdi:television
-                tap_action: 
-                    action: toggle
-
-              - type: entity-button
-                entity: switch.lydplankepower
-                name: Lydplanke
-                icon: mdi:television
-                tap_action: 
-                    action: toggle
+          - type: entity-button
+            entity: switch.tvpower
+            name: TV Stue
+            icon: mdi:television
+            tap_action: 
+                action: toggle
+          - type: entity-button
+            entity: switch.decoderpower
+            name: Dekoder
+            icon: mdi:television
+            tap_action: 
+                action: toggle
+          - type: entity-button
+            entity: switch.lydplankepower
+            name: Lydplanke
+            icon: mdi:television
+            tap_action: 
+                action: toggle

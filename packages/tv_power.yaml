@@ -131,3 +131,17 @@ binary_sensor:
     payload_on: "on"
     payload_off: "off"
     name: Lydplanke mqtt Status
+
+#################################################################
+#                          Samsung TV Cusom                     #
+#################################################################
+
+media_player:
+  - platform: samsungtv_tizen
+    name: Samsung tv stue
+    host: 192.168.86.50
+    port: 8002
+    mac: 64:1c:b0:a2:30:12
+    update_method: smartthings
+    api_key: !secret smarthings_api
+    device_id: !secret samsung_tv_id
