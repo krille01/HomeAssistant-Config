@@ -5,7 +5,7 @@
 #############################################################################################################################################  
 title: 1 etg
 background: center / cover no-repeat url("/local/lovelace/background_spurs_01.jpg") fixed
-icon: mdi:hotel
+icon: mdi:bed
 path: master_bedrrom
 theme: transparent
 cards:
@@ -42,12 +42,12 @@ cards:
 #                                                               #
 #################################################################
 
-        - type: picture-entity
-          entity: group.master_bedroom_lights
-          name: Lys
-          tap_action: 
-            action: toggle
-          image: /local/lovelace/bedrooms/bed-light.jpg
+#        - type: picture-entity
+#          entity: group.master_bedroom_lights
+#          name: Lys
+#          tap_action: 
+#            action: toggle
+#          image: /local/lovelace/bedrooms/bed-light.jpg
 
 #################################################################
 #                                                               #
@@ -70,12 +70,12 @@ cards:
 #                                                               #
 #################################################################
 
-            - type: picture-entity
-              entity: light.night_light_2
-              name: Nattbords lampe
-              tap_action: 
-                action: toggle
-              image: /local/lovelace/bedrooms/walk-in-light_2.jpg
+#           - type: picture-entity
+#             entity: light.night_light_2
+#             name: Nattbords lampe
+#             tap_action: 
+#               action: toggle
+#             image: /local/lovelace/bedrooms/walk-in-light_2.jpg
 
 #################################################################
 #                                                               #

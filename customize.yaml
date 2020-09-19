@@ -32,3 +32,7 @@ binary_sensor.doors:
   icon: mdi:door-closed
 sensor.washing_machine_status:
   icon: mdi:washing-machine
+binary_sensor.lock:
+  icon: mdi:lock
+sensor.roomba_status:
+  icon: mdi:robot-vacuum

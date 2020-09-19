@@ -40,7 +40,7 @@ lovelace: !include lovelace.yaml
 
 
 frontend:
-  themes: !include_dir_named themes
+  themes: !include_dir_named themes/
 
 map:
 

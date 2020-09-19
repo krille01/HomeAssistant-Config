@@ -192,3 +192,32 @@ cards:
             icon: mdi:television
             tap_action: 
                 action: toggle
+
+        - type: horizontal-stack
+          cards:
+          - type: picture-entity
+            entity: media_player.samsung_tv_stue
+            tap_action:
+              action: call-service
+              service: script.turn_on_neflix_on_samsung_tv
+            image: /local/lovelace/tv/netflix.png
+            show_name: false
+            show_state: false
+
+          - type: picture-entity
+            entity: media_player.samsung_tv_stue
+            tap_action:
+              action: call-service
+              service: script.turn_on_nrk_on_samsung_tv
+            image: /local/lovelace/tv/nrk.png
+            show_name: false
+            show_state: false
+
+          - type: picture-entity
+            entity: media_player.samsung_tv_stue
+            tap_action:
+              action: call-service
+              service: script.turn_on_nrk_on_samsung_tv
+            image: /local/lovelace/tv/nrk_super.png
+            show_name: false
+            show_state: false

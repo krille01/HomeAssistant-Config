@@ -54,7 +54,7 @@ automation:
   alias: Månedsskifte Charger
   description: ''
   trigger:
-  - at: 0:30:00
+  - at: 00:30:00
     platform: time
   condition:
   - condition: template
@@ -71,7 +71,7 @@ automation:
   alias: Dagskifte Charger
   description: ''
   trigger:
-  - at: 0:05:00
+  - at: 00:05:00
     platform: time
   action:
   - alias: ''

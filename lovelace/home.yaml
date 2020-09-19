@@ -90,9 +90,9 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-              - person.lill_venke
+              - sensor.lill_venke
               - type: divider
-              - sensor.lill_venke_sin_iphone_battery_level
+              - sensor.lill_venke_sin_iphone_battery_level_2
 
       - type: horizontal-stack
         cards:

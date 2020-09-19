@@ -52,21 +52,97 @@
     sequence:
       - service: rest_command.livingroom_tv_app_youtube
 
-## Resume spotify after TTS on google Home
-  snapshot_music_bedfore_tts:
-    sequence:
-      - event: spotify.controls
-        event_data:
-            action: snapshot
 
-  start_spotify_on_kjokken:
+  turn_on_neflix_on_samsung_tv:
+    alias: turn on neflix on samsung tv
+    mode: single
     sequence:
-      - service: spotcast.start
+    - data:
+        entity_id: media_player.samsung_tv_stue
+        source: Netflix
+      entity_id: media_player.samsung_tv_stue
+      service: media_player.select_source
+
+  turn_on_nrk_on_samsung_tv:
+    alias: turn on nrk on samsung tv
+    mode: single
+    sequence:
+    - data:
+        entity_id: media_player.samsung_tv_stue
+        source: 'nrk tv' 
+      entity_id: media_player.samsung_tv_stue
+      service: media_player.select_source
+
+  tweet_engien_post:
+    alias: Twitter Engien post
+    mode: single
+    sequence:
+    - service: notify.resident_fosserud
+      data_template:
+        message: >-
+          {{ tweet }} #MyHome #SmartHome #FosserudResident
         data:
-          entity_id: media_player.kjokken
+          media: >-
+            {{ image }}
 
-  restore_snapshot_on_kjokken:
+
+  tweet_engine_random:
+    alias: twitter engien random
+    mode: single
     sequence:
-      - event: spotify.controls
-        event_data:
-            action: restore
+    - service: script.tweet_engien_post
+      data_template:
+        tweet: >-
+          {%- macro tweet(topic) -%}
+            {% set tweets = {
+              "robot": [
+                "My Home Assistant has {{ states.sensor.lines_of_code.state }} lines of YAML code",
+                "My Home Assistant is controlling ${{ states.sensor.lights_count.state }} lights at my home",
+                "My Home Assistant has {{ states.sensor.automation_count.state }} automations to do life Easy for me"
+              ],
+              "car": [
+                "My Car has been charging for {{ states.sensor.golf_charging_time.state.split('.')[0] }} hours in the last 7 days.",
+                "I have charged my Car {{ states.sensor.golf_charging_times.state }} times in the last 7 days."
+              ],
+              "hvitevarer": [
+                "I have run the Washing Machine {{ states.sensor.washing_machine_finised.state }} times in the last 7 days.",
+                "I have run the Dish Washer {{ states.sensor.washing_machine_finised.state }} times in the last 7 days."
+              ],
+              "door": [
+                "Yesterday the Doorbell was pressed {{ states.sensor.doorbell_presses.state }} times",
+                "I had {{ states.sensor.doorbell_presses.state }} visitors on my door yesterday."
+              ]
+            } %}
+
+            {{ tweets[topic]|random }}
+          {%- endmacro -%}
+
+          {{ tweet(pick) }}
+
+        image: >-
+          {%- macro image(topic) -%}
+            {% set images = {
+              "robot": [
+                "/config/www/picture/Twitter/homeassistant_3.jpg",
+                "/config/www/picture/Twitter/home_assistant_2.png",
+                "/config/www/picture/Twitter/home_assistant.png"
+              ],
+              
+
+              "car": [
+                "/config/www/picture/Twitter/e-golf.jpg"
+              ],
+
+              "hvitevarer": [
+                "/config/www/picture/Twitter/washin_machine.jpg"
+              ],
+
+              "door": [
+                "/config/www/picture/Twitter/Blink-Intelligent-Video-Doorbell-01.jpeg"
+              ],
+            } %}
+
+            {{ images[topic]|random }}
+          {%- endmacro -%}
+          {{ image(pick) }}
+

@@ -90,7 +90,7 @@ automation:
   alias: Månedsskifte
   description: ''
   trigger:
-  - at: 0:30:00
+  - at: 00:30:00
     platform: time
   condition:
   - condition: template
@@ -106,7 +106,7 @@ automation:
   alias: Årsskifte
   description: ''
   trigger:
-  - at: 0:30:00
+  - at: 00:30:00
     platform: time
   condition:
   - condition: template
@@ -122,7 +122,7 @@ automation:
   alias: Dagskifte
   description: ''
   trigger:
-  - at: 0:05:00
+  - at: 00:05:00
     platform: time
   action:
   - alias: ''

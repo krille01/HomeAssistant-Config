@@ -1,0 +1,8 @@
+volkswagencarnet:
+  username: !secret vw_car_username
+  password: !secret vw_car_password
+  spin: !secret spin_carnet
+  scan_interval: 
+    minutes: 5
+  name:
+    wvwzzzauzlw922094: 'E-Golf'

@@ -8,6 +8,7 @@ telegram_bot:
       - "-426922661" #Door Lock
 
 notify:
+################# Telegram #########################
   - name: Home_assistant
     platform: telegram
     chat_id: '956698324'
@@ -24,7 +25,17 @@ notify:
     platform: telegram
     chat_id: "-426922661"
 
+################### Slack #################################
   - name: slack
     platform: slack
     api_key: !secret slack_key
     default_channel: '#home-automation'
+
+################### Twitter ##################################
+
+  - name: resident_fosserud
+    platform: twitter
+    consumer_key: !secret twitter_key
+    consumer_secret: !secret twitter_secret
+    access_token: !secret twitter_token
+    access_token_secret: !secret twitter_token_secret

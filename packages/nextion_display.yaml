@@ -1,0 +1,81 @@
+sensor:
+  - platform: template
+    sensors:
+      light_one_on:
+        friendly_name: "Lys 1 Nextion"
+        value_template: >-
+          {% if states('light.hovedsoverom') =='on' %}
+            1
+          {%- else -%}
+            0
+          {%- endif %}
+
+      status_vindfang_on:
+        friendly_name: "Status Vindfang"
+        value_template: >-
+          {% if states('light.lys_vindfang') =='on' %}
+            1
+          {%- else -%}
+            0
+          {%- endif %}
+
+      status_trapp_on:
+        friendly_name: "Status trapp"
+        value_template: >-
+          {% if states('light.trapp_etg1') =='on' %}
+            1
+          {%- else -%}
+            0
+          {%- endif %}
+
+      status_kjokken_on:
+        friendly_name: "Status kjokken"
+        value_template: >-
+          {% if states('light.lys_kjokken') =='on' %}
+            1
+          {%- else -%}
+            0
+          {%- endif %}
+
+      status_spisebord_on:
+        friendly_name: "Status spisebord"
+        value_template: >-
+          {% if states('light.lys_spisebord_2') =='on' %}
+            1
+          {%- else -%}
+            0
+          {%- endif %}
+
+      status_stue_on:
+        friendly_name: "Status stue"
+        value_template: >-
+          {% if states('light.lys_stue_2') =='on' %}
+            1
+          {%- else -%}
+            0
+          {%- endif %}
+
+      status_oslo_on:
+        friendly_name: "Status Oslo Lampe"
+        value_template: >-
+          {% if states('light.oslo_lampe') =='on' %}
+            1
+          {%- else -%}
+            0
+          {%- endif %}
+
+      play_now_soverom:
+        friendly_name: "Playing Now Soverom"
+        value_template: "{{ state_attr('media_player.home_hovedsoverom', 'media_title') }}"
+
+      artist_soverom:
+        friendly_name: "Artist Soverom"
+        value_template: "{{ state_attr('media_player.home_hovedsoverom', 'media_artist') }}"
+
+      play_now_kjokken:
+        friendly_name: "Playing Now Kjøkken"
+        value_template: "{{ state_attr('media_player.kjokken', 'media_title') }}"
+
+      artist_kjokken:
+        friendly_name: "Artist kjokken"
+        value_template: "{{ state_attr('media_player.kjokken', 'media_artist') }}"

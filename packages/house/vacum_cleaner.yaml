@@ -14,7 +14,7 @@ homeassistant:
       icon: mdi:battery
       unit_of_measurement: '%'
     sensor.roomba_status:
-      icon: mdi:format-list-bulleted
+      icon: mdi:robot-vacuum
 
 
 

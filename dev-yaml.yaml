@@ -17,3 +17,4 @@ views:
   - !include lovelace/dev/dash_test.yaml
   - !include lovelace/dev/dev_light.yaml
   - !include lovelace/dev/dev_person.yaml
+  - !include lovelace/dev/dev_printer.yaml

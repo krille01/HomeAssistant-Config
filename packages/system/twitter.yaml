@@ -1,0 +1,88 @@
+sensor:
+  - platform: command_line
+    name: Lines of Code
+    command: "find /config -name '*.yaml' | xargs cat | wc -l"
+    unit_of_measurement: 'Lines'
+    scan_interval: 20000
+
+  - platform: history_stats
+    name: Doorbell Presses
+    entity_id: binary_sensor.doorbell_button
+    state: 'on'
+    type: count
+    end: '{{ now() }}'
+    duration:
+      hours: 24
+
+  - platform: history_stats
+    name: TV time
+    entity_id: media_player.samsung_tv_stue
+    state: 'on'
+    type: time
+    end: '{{ now() }}'
+    duration:
+      hours: 24
+
+  - platform: history_stats
+    name: Washing Machine Finised
+    entity_id: input_select.washing_machine_status
+    state: 'Clean'
+    type: count
+    end: '{{ now() }}'
+    duration:
+      days: 7
+
+  - platform: history_stats
+    name: Dish Washer Finised
+    entity_id: input_select.dish_machine_status
+    state: 'Clean'
+    type: count
+    end: '{{ now() }}'
+    duration:
+      days: 7
+
+  - platform: history_stats
+    name: Roomba cleaning
+    entity_id: sensor.roomba_status
+    state: 'Cleaning'
+    type: count
+    end: '{{ now() }}'
+    duration:
+      days: 7
+
+  - platform: history_stats
+    name: Golf Charging time
+    entity_id: binary_sensor.e_golf_external_power
+    state: 'on'
+    type: time
+    end: '{{ now() }}'
+    duration:
+      days: 7
+
+  - platform: history_stats
+    name: Golf Charging times
+    entity_id: binary_sensor.e_golf_external_power
+    state: 'on'
+    type: count
+    end: '{{ now() }}'
+    duration:
+      days: 7
+
+automation:
+- alias: 'Random House stats'
+  id: b274a40d-cb67-4d6a-94d1-5fa685ae5ea4
+  trigger:
+    - platform: time_pattern
+      hours: '/2'
+      minutes: 45
+  action:
+    - service: script.tweet_engine_random
+      data_template:
+        pick: >-
+          {% set pick = [
+            "robot",
+            "car",
+            "hvitevarer",
+            "door"
+          ] %}
+          {{ pick|random }}

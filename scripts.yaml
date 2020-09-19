@@ -1,0 +1,9 @@
+turn_on_neflix_on_samsung_tv:
+  alias: turn on neflix on samsung tv
+  mode: single
+  sequence:
+  - data:
+      entity_id: media_player.samsung_tv_stue
+      source: Netflix
+    entity_id: media_player.samsung_tv_stue
+    service: media_player.select_source
