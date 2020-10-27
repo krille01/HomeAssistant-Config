@@ -7,3 +7,59 @@ turn_on_neflix_on_samsung_tv:
       source: Netflix
     entity_id: media_player.samsung_tv_stue
     service: media_player.select_source
+netflix:
+  alias: Netflix
+  sequence:
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.tv_stue
+      source: Netflix
+  mode: single
+  icon: mdi:netflix
+tweet_engien_post:
+  alias: Twitter Engien post
+  mode: single
+  sequence:
+  - service: notify.resident_fosserud
+    data_template:
+      message: '{{ tweet }} #MyHome #SmartHome #FosserudResident'
+      data:
+        media: '{{ image }}'
+tweet_engine_random:
+  alias: twitter engien random
+  mode: single
+  sequence:
+  - service: script.tweet_engien_post
+    data_template:
+      tweet: "{%- macro tweet(topic) -%}\n  {% set tweets = {\n    \"robot\": [\n\
+        \      \"My Home Assistant has {{ states.sensor.lines_of_code.state }} lines\
+        \ of YAML code\",\n      \"My Home Assistant is controlling ${{ states.sensor.lights_count.state\
+        \ }} lights at my home\",\n      \"My Home Assistant has {{ states.sensor.automation_count.state\
+        \ }} automations to do life Easy for me\"\n    ],\n    \"car\": [\n      \"\
+        My Car has been charging for {{ states.sensor.golf_charging_time.state.split('.')[0]\
+        \ }} hours in the last 7 days.\",\n      \"I have charged my Car {{ states.sensor.golf_charging_times.state\
+        \ }} times in the last 7 days.\"\n    ],\n    \"hvitevarer\": [\n      \"\
+        I have run the Washing Machine {{ states.sensor.washing_machine_finised.state\
+        \ }} times in the last 7 days.\",\n      \"I have run the Dish Washer {{ states.sensor.washing_machine_finised.state\
+        \ }} times in the last 7 days.\"\n    ],\n    \"door\": [\n      \"Yesterday\
+        \ the Doorbell was pressed {{ states.sensor.doorbell_presses.state }} times\"\
+        ,\n      \"I had {{ states.sensor.doorbell_presses.state }} visitors on my\
+        \ door yesterday.\"\n    ]\n  } %}\n  {{ tweets[topic]|random }}\n{%- endmacro\
+        \ -%} {{ tweet(pick) }}"
+      image: "{%- macro image(topic) -%}\n  {% set images = {\n    \"robot\": [\n\
+        \      \"/config/www/picture/Twitter/homeassistant_3.jpg\",\n      \"/config/www/picture/Twitter/home_assistant_2.png\"\
+        ,\n      \"/config/www/picture/Twitter/home_assistant.png\"\n    ],\n    \n\
+        \    \"car\": [\n      \"/config/www/picture/Twitter/e-golf.jpg\"\n    ],\n\
+        \    \"hvitevarer\": [\n      \"/config/www/picture/Twitter/washin_machine.jpg\"\
+        \n    ],\n    \"door\": [\n      \"/config/www/picture/Twitter/Blink-Intelligent-Video-Doorbell-01.jpeg\"\
+        \n    ],\n  } %}\n  {{ images[topic]|random }}\n{%- endmacro -%} {{ image(pick)\
+        \ }}"
+tv2:
+  alias: tv2
+  sequence:
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.tv_stue
+      source: TV 2 Sumo
+  mode: single
+  icon: mdi:television-play

@@ -46,3 +46,149 @@
   action:
   - event: o365_token.get
     event_data: {}
+- id: '1601295517076'
+  alias: Tag scanned
+  description: ''
+  trigger:
+  - platform: event
+    event_type: tag_scanned
+    event_data:
+      device_id: 0aa4d51404ac11eba82b05824f912eac
+      tag_id: 42-A9-1E-50
+  condition: []
+  action:
+  - service: spotcast.start
+    data:
+      entity_id: media_player.home_hovedsoverom
+      uri: spotify:playlist:37i9dQZF1DX8FwnYE6PRvL
+      force_playback: true
+      random_song: true
+  mode: single
+- id: '1601894663007'
+  alias: Tag Brikke test is scanned
+  description: ''
+  trigger:
+  - platform: event
+    event_type: tag_scanned
+    event_data:
+      tag_id: DA-19-6D-25
+      device_id: 0aa4d51404ac11eba82b05824f912eac
+  condition: []
+  action:
+  - service: light.toggle
+    data: {}
+    entity_id: light.hovedsoverom
+  mode: single
+- id: '1601899860517'
+  alias: Tag Natta Sang is scanned
+  description: ''
+  trigger:
+  - platform: event
+    event_type: tag_scanned
+    event_data:
+      device_id: 0aa4d51404ac11eba82b05824f912eac
+      tag_id: B9-C3-1D-B1
+  condition: []
+  action:
+  - service: spotcast.start
+    data:
+      account: home
+      entity_id: media_player.rom_sara
+      uri: spotify:playlist:3NPLTo5H3eQspLNa0LDmG6
+      force_playback: true
+      random_song: true
+  mode: single
+- id: '1602159512431'
+  alias: Doorbell pressed
+  description: Ring the Chiome when doorbell is pressed
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.video_doorbell_pressed
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.doorbell_chime_active
+    state: 'on'
+  action:
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.doorbell_chime
+  - delay: 00:00:01
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.doorbell_chime
+  mode: single
+- id: '1602162930788'
+  alias: Notify Phone on Doorbell
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.video_doorbell_pressed
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.mobile_app_telefon_kristian
+    data:
+      message: Noen Ringer på Døra
+      data:
+        actions:
+        - action: Video
+          title: Vis Video
+        - action: Test
+          title: Test
+  mode: single
+- id: '1602858563813'
+  alias: Switch gang soverom
+  description: Skru av og på lys gang soverom fra soverom
+  trigger:
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: byter_hovedsoverom
+      event: 4002
+  condition: []
+  action:
+  - service: light.toggle
+    data: {}
+    entity_id: light.gang_soverom_2
+  mode: single
+- id: '1603449300307'
+  alias: Webhook Kontor Presence Availability
+  description: ''
+  trigger:
+  - platform: webhook
+    webhook_id: kontor_presence_availability
+  condition: []
+  action:
+  - service: input_select.select_option
+    data:
+      option: '{{ trigger.query["status"] }}'
+      entity_id: input_select.office_teams_presence_availibilty
+  mode: single
+- id: '1603449876435'
+  alias: Webhook Kontor Presence Activity
+  description: ''
+  trigger:
+  - platform: webhook
+    webhook_id: kontor_presence_activity
+  condition: []
+  action:
+  - service: input_select.select_option
+    data:
+      option: '{{ trigger.query["status"] }}'
+      entity_id: input_select.office_teams_presence_activity
+  mode: single
+- id: '1603803429077'
+  alias: Netflix on tv
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.netflix_on_tv
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: script.turn_on
+    data: {}
+    entity_id: script.netflix
+  mode: single

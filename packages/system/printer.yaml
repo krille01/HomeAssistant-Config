@@ -1,6 +1,6 @@
 sensor:
   - platform: rest
     name: "Finder Progress"
-    resource: http://192.168.86.52:5000/192.168.86.20/progress
+    resource: http://192.168.86.67:5000/192.168.86.20/progress
     value_template: '{{ value_json.PercentageCompleted }}'
     unit_of_measurement: "%"

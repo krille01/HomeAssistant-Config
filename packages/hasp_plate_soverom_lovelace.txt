@@ -1,0 +1,54 @@
+  - path: plate_soverom
+    title: plate_soverom
+    badges:
+      - entity: binary_sensor.plate_soverom_connected
+      - entity: sensor.plate_soverom_status
+    cards:
+      - type: entity-button
+        name: Click here for HASP plate_soverom First-Time Setup
+        entity: automation.hasp_plate_soverom_00_firsttimesetup
+        show_icon: false
+        show_name: true
+        hold_action:
+          action: more-info
+        tap_action:
+          action: call-service
+          service: automation.trigger
+          service_data:
+            entity_id: automation.hasp_plate_soverom_00_firsttimesetup
+      - type: entities
+        title: plate_soverom Colors
+        show_header_toggle: false
+        entities:
+          - entity: input_select.hasp_plate_soverom_theme
+          - entity: light.hasp_plate_soverom_selected_foreground_color
+            icon: 'mdi:palette'
+            name: plate_soverom Selected Foreground Color
+          - entity: light.hasp_plate_soverom_selected_background_color
+            icon: 'mdi:palette'
+            name: plate_soverom Selected Background Color
+          - entity: light.hasp_plate_soverom_unselected_foreground_color
+            icon: 'mdi:palette'
+            name: plate_soverom Unselected Foreground Color
+          - entity: light.hasp_plate_soverom_unselected_background_color
+            icon: 'mdi:palette'
+            name: plate_soverom Unselected Background Color
+      - type: entities
+        title: plate_soverom Page Selection
+        show_header_toggle: false
+        entities:
+          - entity: input_number.hasp_plate_soverom_activepage
+          - entity: input_number.hasp_plate_soverom_pagebutton1page
+          - entity: input_text.hasp_plate_soverom_pagebutton1label
+          - entity: input_select.hasp_plate_soverom_pagebutton1font
+          - entity: input_number.hasp_plate_soverom_pagebutton2page
+          - entity: input_text.hasp_plate_soverom_pagebutton2label
+          - entity: input_select.hasp_plate_soverom_pagebutton2font
+          - entity: input_number.hasp_plate_soverom_pagebutton3page
+          - entity: input_text.hasp_plate_soverom_pagebutton3label
+          - entity: input_select.hasp_plate_soverom_pagebutton3font
+      - type: entities
+        title: plate_soverom Backlight
+        show_header_toggle: false
+        entities:
+          - light.plate_soverom_backlight

@@ -1,0 +1,4 @@
+input_boolean:
+  netflix_on_tv:
+    name: Netflix
+    icon: mdi:netflix

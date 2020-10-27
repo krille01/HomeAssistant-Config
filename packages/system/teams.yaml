@@ -1,0 +1,27 @@
+input_select:
+  office_teams_presence_availibilty:
+    name: 'Kontor Teams Presence Avalibilty'
+    options:
+      - Tilgjengelig
+      - Opptatt
+      - Straks Tilbake
+      - Borte
+      - Ikke Forstyrr
+      - Uvirksom
+      - Offline
+      - Avslått
+
+  office_teams_presence_activity:
+    name: 'Kontor Teams Presence Activity'
+    options:
+      - Tilgjengelig
+      - Presenterer
+      - I En Samtale
+      - I Et Møte
+      - Opptatt
+      - Borte
+      - Straks Tilbake
+      - Ikke Forstyrr
+      - Uvirksom
+      - Offline
+      - Avslått

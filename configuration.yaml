@@ -40,7 +40,7 @@ lovelace: !include lovelace.yaml
 
 
 frontend:
-  themes: !include_dir_named themes/
+  themes: !include_dir_merge_named themes
 
 map:
 
@@ -71,7 +71,7 @@ python_script:
 
 mqtt:
   broker: 192.168.86.45
-  port: "1883"
+  port: 1883
   client_id: home-assistant-1
   discovery: true
   discovery_prefix: homeassistant
@@ -88,10 +88,31 @@ spotcast:
     lill:
       sp_dc: !secret sp_dc_lill
       sp_key: !secret sp_key_lill
+    home:
+      sp_dc: !secret sp_dc_home
+      sp_key: !secret sp_key_home
 
 tts:
   - platform: google_translate
     base_url: http://192.168.86.72:8123
+
+emulated_roku:
+  servers:
+    - name: Home Assistant
+      listen_port: 8060
+
+emulated_hue:
+  listen_port: 8061
+  expose_by_default: true
+  exposed_domains:
+    - light
+    - switch
+    - input_boolean
+  entities:
+    input_boolean.netflix_on_tv:
+      name: Netflix
+
+
 
 
 # notify: !include config/notify.yaml
@@ -116,12 +137,12 @@ device_tracker:
       track_new_devices: true
     hosts:
       hostname1: 192.168.86.27
-      hostname2: 192.168.86.29
+      hostname2: 192.168.86.39
 zone: !include config/system/zones.yaml
 
 
 automation: !include automations.yaml
-script: !include config/scripts.yaml
+script: !include scripts.yaml
 cover: !include config/cover.yaml
 camera: !include config/camera.yaml
 input_select: !include config/input_select.yaml

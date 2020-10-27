@@ -40,11 +40,15 @@
   type: module
 - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
   type: module
-- url: /hacsfiles/custom-header/custom-header.js
+- url: /local/plugins/custom-header.js?v=0.83
   type: module
 - url: /hacsfiles/search-card/search-card.js
   type: module
 - url: /hacsfiles/plan-coordinates/plan-coordinates.js
   type: module
 - url: /hacsfiles/light-entity-row/light-entity-row.js
+  type: module
+- url: /hacsfiles/weather-card/weather-card.js
+  type: module
+- url: /hacsfiles/atomic-calendar-revive/atomic-calendar-revive.js
   type: module

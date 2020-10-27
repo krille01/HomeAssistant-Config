@@ -5,7 +5,7 @@
 #############################################################################################################################################    title: Test
 title: System Status
 background: center / cover no-repeat url("/local/lovelace/background_spurs_01.jpg") fixed
-icon: mdi:settings
+icon: mdi:cog
 path: system status
 theme: transparent
 cards:

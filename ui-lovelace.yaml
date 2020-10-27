@@ -23,6 +23,7 @@ views:
   - !include lovelace/sara.yaml
   - !include lovelace/system_status.yaml
   - !include lovelace/hvitevarer.yaml
+  - !include lovelace/car.yaml
 
   
       

@@ -1,0 +1,109 @@
+title: Car
+background: center / cover no-repeat url("/local/lovelace/background_spurs_01.jpg") fixed
+icon: mdi:car
+path: car
+theme: transparent
+cards:
+
+  - type: vertical-stack
+    cards:
+    - type: picture-elements
+      image: /local/passat/passat.png
+      elements:
+        - type: image
+          entity: switch.e_golf_electric_climatisation
+          image: /local/passat/blank.png
+          style:
+            top: 39.5%
+            left: 55%
+            width: 43%
+          state_image:
+            "on": /local/passat/passat_heat.png
+  
+        - type: image
+          entity: binary_sensor.e_golf_climatisation_without_external_power
+          image: /local/passat/blank.png
+          style:
+            top: 62.8%
+            left: 21.2%
+            width: 43%
+          state_image:
+            "on": /local/passat/passatcharging.png
+  
+        - type: image
+          entity: binary_sensor.e_golf_parking_light
+          image: /local/passat/blank.png
+          style:
+            top: 66.8%
+            left: 37.2%
+            width: 37%
+          state_image:
+            "on": /local/passat/passat_light.png
+        
+        - type: image
+          entity: lock.e_golf_door_locked
+          image:  /local/passat/blank.png
+          style:
+            top: 42.3%
+            left: 57%
+            width: 2%
+          state_image:
+            locked: /local/passat/blink.gif
+  
+        - type: state-icon
+          entity: lock.e_golf_door_locked
+          style:
+            top: 87%
+            left: 47%
+  
+        - type: state-icon
+          entity: switch.e_golf_climatisation
+          hold_action: 
+            action: toggle
+          style:
+            top: 87%
+            left: 58%
+  
+        - type: state-icon
+          entity: switch.e_golf_window_heater
+          hold_action:
+            action: toggle
+          style:
+            top: 87%
+            left: 69%
+  
+        - type: state-icon
+          entity: switch.e_golf_charging
+          style:
+            top: 87%
+            left: 80%
+  
+        - type: state-label
+          entity: sensor.e_golf_battery_level
+          style:
+            top: 96%
+            left: 81%
+  
+#        - type: state-icon
+#          entity: sensor.wvwzzz3czje020489_fuel_level
+#          style:
+#            top: 87%
+#            left: 91%
+  
+#        - type: state-label
+#          entity: sensor.wvwzzz3czje020489_fuel_level
+#          style:
+#            top: 96%
+#            left: 92%
+#  
+        - type: state-icon
+          entity: sensor.e_golf_odometer
+          style:
+            top: 87%
+            left: 36%
+  
+        - type: state-label
+          entity: sensor.e_golf_odometer
+          style:
+            top: 96%
+            left: 37%

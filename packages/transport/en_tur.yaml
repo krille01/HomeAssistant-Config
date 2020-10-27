@@ -18,12 +18,21 @@ sensor:
   - platform: template
     sensors:
       next_buss_grenseveien:
-        friendly_name: Neste buss fra Grenseveien
-        value_template: "{{ states.sensor.transport_grenseveien_platform_9603.attributes.next_due_in }}"
-
-  - platform: template
-    sensors:
+        friendly_name: Neste buss fra Grenseveien mot ski
+        value_template: "{{ states.sensor.transport_grenseveien_platform_9604.attributes.next_due_in }}"
+      rute_second:
+        friendly_name: Neste rute fra Grenseveien mot ski
+        value_template: "{{ states.sensor.transport_grenseveien_platform_9604.attributes.next_route }}"
+      rute_first:
+        friendly_name: Rute fra Grenseveien mot ski
+        value_template: "{{ states.sensor.transport_grenseveien_platform_9604.attributes.route }}"
+      
       next_buss_grenseveien_bhg:
         friendly_name: Neste buss fra Grenseveien til Barnehagen
-        value_template: "{{ states.sensor.transport_grenseveien_platform_9604.attributes.next_due_in }}"
-  
+        value_template: "{{ states.sensor.transport_grenseveien_platform_9603.attributes.next_due_in }}"
+      rute_second_bhg:
+        friendly_name: Neste rute fra Grenseveien mot vinterbro
+        value_template: "{{ states.sensor.transport_grenseveien_platform_9603.attributes.next_route }}"
+      rute_first_bhg:
+        friendly_name: Rute fra Grenseveien mot vinterbro
+        value_template: "{{ states.sensor.transport_grenseveien_platform_9603.attributes.route }}"

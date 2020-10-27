@@ -5,7 +5,7 @@
 
 automation:
   - alias: 'Toggle oslo lampe from dimmer'
-    initial_state: 'on'
+    initial_state: true
     trigger:
       platform: event
       event_type: deconz_event
@@ -17,7 +17,7 @@ automation:
       entity_id: light.oslo_lampe
 
   - alias: 'Increase brightness of oslo lampe from dimmer'
-    initial_state: 'on'
+    initial_state: true
     trigger:
       platform: event
       event_type: deconz_event
@@ -33,7 +33,7 @@ automation:
             {{ [bri+30, 249] | min }}
 
   - alias: 'Decrease brightness of lamp oslo lampe dimmer'
-    initial_state: 'on'
+    initial_state: true
     trigger:
       platform: event
       event_type: deconz_event

@@ -17,3 +17,10 @@ dashboards:
     icon: mdi:tools
     show_in_sidebar: true
     require_admin: true
+  dashboard-stue:
+    mode: yaml
+    filename: dash-stue.yaml
+    title: dash-stue
+    icon: mdi:sofa
+    show_in_sidebar: true
+    require_admin: false

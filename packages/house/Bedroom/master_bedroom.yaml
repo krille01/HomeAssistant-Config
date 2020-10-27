@@ -6,7 +6,7 @@
 
 automation:
   - alias: 'Turn On Bedroom from dimmer normal'
-    initial_state: 'on'
+    initial_state: true
     trigger:
       platform: event
       event_type: deconz_event
@@ -22,7 +22,7 @@ automation:
 
 
   - alias: 'Turn On Bedroom from dimmer bright'
-    initial_state: 'on'
+    initial_state: true
     trigger:
       platform: event
       event_type: deconz_event
@@ -37,7 +37,7 @@ automation:
           brightness_pct: 100
 
   - alias: 'Increase brightness Bedroom from dimmer'
-    initial_state: 'on'
+    initial_state: true
     trigger:
       platform: event
       event_type: deconz_event
@@ -52,7 +52,7 @@ automation:
           data: {"bri_inc":254, "transitiontime":50}
 
   - alias: 'Decrease brightness Bedroom from dimmer'
-    initial_state: 'on'
+    initial_state: true
     trigger:
       platform: event
       event_type: deconz_event
@@ -67,7 +67,7 @@ automation:
           data: {"bri_inc":-254, "transitiontime":50}
 
   - alias: 'Stop brightness Bedroom from dimmer'
-    initial_state: 'on'
+    initial_state: true
     trigger:
       - platform: event
         event_type: deconz_event
@@ -87,7 +87,7 @@ automation:
           data: {"bri_inc":0}
           
   - alias: 'Turn Off Bedroom from dimmer'
-    initial_state: 'on'
+    initial_state: true
     trigger:
       platform: event
       event_type: deconz_event
